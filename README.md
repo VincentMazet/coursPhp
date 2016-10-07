@@ -1,4 +1,4 @@
-#Initiation au PHP
+#Initiation au PHP Vercruysse/MAZET
 
 ##Présenatation du PHP
 
