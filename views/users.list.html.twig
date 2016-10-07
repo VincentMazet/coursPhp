@@ -27,6 +27,11 @@
           <button type="submit">Modifier</button>
         </form>
       </td>
+      <td>
+        <form method="get" name="formulaire" action="{{ url('users.edit', {id: user.id}) }}">
+          <button type="submit">Ajouter un PC</button>
+        </form>
+      </td>
    </tr>
 {% endfor %}
 </tbdoy>
