@@ -79,6 +79,8 @@ class UserRepository
     public function delete($id)
     {
         $queryBuilder = $this->db->createQueryBuilder();
+        $pcr = new \App\Pc\Repository\PCRepository($this->db);
+
         $queryBuilder
           ->delete('users')
           ->where('id = :id')
@@ -95,6 +97,8 @@ class UserRepository
           ->where('id = :id')
           ->setParameter(':id', $parameters['id']);
 
+          $pcr = new \App\Pc\Repository\PCRepository($this->db);
+
         if ($parameters['nom']) {
             $queryBuilder
               ->set('nom', ':nom')
@@ -110,7 +114,7 @@ class UserRepository
         if ($parameters['idpc']) {
             $queryBuilder
             ->set('idpc', ':idpc')
-            ->setParameter(':idpc', $parameters['idpc']);
+            ->setParameter(':idpc', $pcr->getIdByOS($parameters['idpc']));
         }
 
         $statement = $queryBuilder->execute();
