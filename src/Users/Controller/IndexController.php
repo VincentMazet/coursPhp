@@ -26,8 +26,10 @@ class IndexController
     {
         $parameters = $request->attributes->all();
         $user = $app['repository.user']->getById($parameters['id']);
+        $pcs = $app['repository.pc']->getAll();
 
-        return $app['twig']->render('users.form.html.twig', array('user' => $user));
+        return $app['twig']->render('users.form.html.twig', array('user' => $user,
+                                                                  'pcs' => $pcs));
     }
 
     public function saveAction(Request $request, Application $app)
@@ -35,7 +37,8 @@ class IndexController
         $parameters = $request->request->all();
         if ($parameters['id']) {
             $user = $app['repository.user']->update($parameters);
-        } else {
+        }
+        else {
             $user = $app['repository.user']->insert($parameters);
         }
 
@@ -44,6 +47,7 @@ class IndexController
 
     public function newAction(Request $request, Application $app)
     {
-        return $app['twig']->render('users.form.html.twig');
+        $pcs = $app['repository.pc']->getAll();
+        return $app['twig']->render('users.form.html.twig', array('pcs' => $pcs));
     }
 }

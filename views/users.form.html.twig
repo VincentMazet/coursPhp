@@ -10,6 +10,18 @@
 
     <label for="name">Prénom : </label>
     <input type="text" name="prenom" value={{user.prenom}}  />
+
+    <label for="name">OS: </label>
+
+    <SELECT name="idpc" size="1">
+    <OPTION>{{user.pc.getOsPC()}}
+      {% for pc in pcs %}
+        {% if pc.getOsPC() != user.pc.getOsPC() %}
+          <OPTION>{{pc.getOsPC()}}
+        {% endif %}
+      {% endfor %}
+    </SELECT>
+
     {% else %}
 <form method="post" name="formulaire" action="{{ url('users.save') }}">
     <label for="name">Nom : </label>
@@ -17,8 +29,14 @@
 
     <label for="name">Prénom : </label>
     <input type="text" name="prenom" />
-    {% endif %}
 
+    <label for="name">OS: </label>
+
+    <SELECT name="idpc" size="1">
+      {% for pc in pcs %}
+        <OPTION>{{pc.getOsPC()}}
+      {% endfor %}
+    </SELECT>
+{% endif %}
     <button type="submit">Envoyer</button>
-
 </form>

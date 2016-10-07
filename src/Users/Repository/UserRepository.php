@@ -3,6 +3,10 @@
 namespace App\Users\Repository;
 
 use App\Users\Entity\User;
+use App\Pc\Entity\Pc;
+
+use App\Pc\Repository;
+
 use Doctrine\DBAL\Connection;
 
 /**
@@ -41,8 +45,9 @@ class UserRepository
 
        $statement = $queryBuilder->execute();
        $usersData = $statement->fetchAll();
+       $pcr = new \App\Pc\Repository\PCRepository($this->db);
        foreach ($usersData as $userData) {
-           $userEntityList[$userData['id']] = new User($userData['id'], $userData['nom'], $userData['prenom']);
+           $userEntityList[$userData['id']] = new User($userData['id'], $userData['nom'], $userData['prenom'], $pcr->getNameById($userData['idpc']));
        }
 
        return $userEntityList;
@@ -66,8 +71,9 @@ class UserRepository
            ->setParameter(0, $id);
        $statement = $queryBuilder->execute();
        $userData = $statement->fetchAll();
+       $pcr = new \App\Pc\Repository\PCRepository($this->db);
 
-       return new User($userData[0]['id'], $userData[0]['nom'], $userData[0]['prenom']);
+       return new User($userData[0]['id'], $userData[0]['nom'], $userData[0]['prenom'], $pcr->getNameById($userData[0]['idpc']));
    }
 
     public function delete($id)
@@ -101,22 +107,31 @@ class UserRepository
             ->setParameter(':prenom', $parameters['prenom']);
         }
 
+        if ($parameters['idpc']) {
+            $queryBuilder
+            ->set('idpc', ':idpc')
+            ->setParameter(':idpc', $parameters['idpc']);
+        }
+
         $statement = $queryBuilder->execute();
     }
 
     public function insert($parameters)
     {
         $queryBuilder = $this->db->createQueryBuilder();
+        $pcr = new \App\Pc\Repository\PCRepository($this->db);
         $queryBuilder
           ->insert('users')
           ->values(
               array(
                 'nom' => ':nom',
                 'prenom' => ':prenom',
+                'idpc' => ':idpc',
               )
           )
           ->setParameter(':nom', $parameters['nom'])
-          ->setParameter(':prenom', $parameters['prenom']);
+          ->setParameter(':prenom', $parameters['prenom'])
+          ->setParameter(':idpc', $pcr->getIdByOS($parameters['idpc']));
         $statement = $queryBuilder->execute();
     }
 }
