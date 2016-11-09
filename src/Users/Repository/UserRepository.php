@@ -156,6 +156,8 @@ class UserRepository
     {
         $queryBuilder = $this->db->createQueryBuilder();
 
+        $this->loginAlreadyExist($parameters['login']);
+
         $queryBuilder
           ->insert('users')
           ->values(
@@ -172,5 +174,24 @@ class UserRepository
           ->setParameter(':password', $parameters['password']);
 
           $statement = $queryBuilder->execute();
+    }
+
+    private function loginAlreadyExist($login)
+    {
+      $queryBuilder = $this->db->createQueryBuilder();
+
+      $queryBuilder
+           ->select('u.*')
+           ->from('users', 'u')
+           ->where('login = ?')
+           ->setParameter(0, $login);
+
+      $statement = $queryBuilder->execute();
+      $userData = $statement->fetchAll();
+      $result = count($userData);
+      if($result != 0){
+         return new Response('login Already Exist', 409, array('X-Status-Code' => 200));
+         die;       
+       }
     }
 }
