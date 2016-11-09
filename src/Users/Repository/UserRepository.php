@@ -4,6 +4,9 @@ namespace App\Users\Repository;
 
 use App\Users\Entity\User;
 
+use Symfony\Component\HttpFoundation\Response;
+
+
 use Doctrine\DBAL\Connection;
 
 /**
@@ -21,6 +24,15 @@ class UserRepository
         $this->db = $db;
     }
 
+    /**
+    * Verify if the username and the password is correct.
+    *
+    * @param string $login
+    *   The login of the user to connect.
+    * @param string $password
+    *   The password of the user to connect.
+    * @return a json array of the user or an error;
+    */
     public function connect($login, $password){
       $queryBuilder = $this->db->createQueryBuilder();
       $queryBuilder
@@ -32,12 +44,13 @@ class UserRepository
         ->setParameter(':password', $password);
 
         $statement = $queryBuilder->execute();
-        $usersData = $statement->fetchAll();
-        $result = count($usersData);
+        $userData = $statement->fetchAll();
+        $result = count($userData);
         if($result == 0 || $result > 1){
-          return "Erreur de login";
+          return new Response('Connexion Error', 403, array('X-Status-Code' => 200));
         }
-        return true;
+        $user = new User($userData[0]['id'], $userData[0]['nom'], $userData[0]['prenom'], $userData[0]['login'], $userData[0]['password']);
+       return json_encode($user->toArray());
 
     }
 
