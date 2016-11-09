@@ -9,18 +9,13 @@
     <input type="text" name="nom" value={{user.nom}} />
 
     <label for="name">Prénom : </label>
-    <input type="text" name="prenom" value={{user.prenom}}  />
+    <input type="text" name="prenom" value={{user.prenom}}  
 
-    <label for="name">OS: </label>
+    <label for="password">Login : </label>
+    <input type="text" value={{user.login}}
 
-    <SELECT name="idpc" size="1">
-    <OPTION>{{user.pc.getOsPC()}}
-      {% for pc in pcs %}
-        {% if pc.getOsPC() != user.pc.getOsPC() %}
-          <OPTION>{{pc.getOsPC()}}
-        {% endif %}
-      {% endfor %}
-    </SELECT>
+    <label for="password">Password : </label>
+    <input type="text" value={{user.password}} />
 
     {% else %}
 <form method="post" name="formulaire" action="{{ url('users.save') }}">
@@ -30,13 +25,14 @@
     <label for="name">Prénom : </label>
     <input type="text" name="prenom" />
 
-    <label for="name">OS: </label>
+    <label for="password">Login : </label>
+    <input type="text" name="login" />
 
-    <SELECT name="idpc" size="1">
-      {% for pc in pcs %}
-        <OPTION>{{pc.getOsPC()}}
-      {% endfor %}
-    </SELECT>
+    <label for="password">Password : </label>
+    <input type="text" name="password" />
+
+
+
 {% endif %}
     <button type="submit">Envoyer</button>
 </form>

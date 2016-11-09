@@ -7,6 +7,16 @@ use Symfony\Component\HttpFoundation\Request;
 
 class IndexController
 {
+    public function loginAction(Request $request, Application $app)
+    {
+        $parameters = $request->request->all();
+        $login = $parameters['login'];
+        $password = $parameters['password'];
+        $result = $app['repository.user']->connect($login, $password);
+        
+        return $result;
+    }
+
     public function listAction(Request $request, Application $app)
     {
         $users = $app['repository.user']->getAll();
@@ -26,10 +36,8 @@ class IndexController
     {
         $parameters = $request->attributes->all();
         $user = $app['repository.user']->getById($parameters['id']);
-        $pcs = $app['repository.pc']->getAll();
 
-        return $app['twig']->render('users.form.html.twig', array('user' => $user,
-                                                                  'pcs' => $pcs));
+        return $app['twig']->render('users.form.html.twig', array('user' => $user));
     }
 
     public function saveAction(Request $request, Application $app)
@@ -47,7 +55,6 @@ class IndexController
 
     public function newAction(Request $request, Application $app)
     {
-        $pcs = $app['repository.pc']->getAll();
-        return $app['twig']->render('users.form.html.twig', array('pcs' => $pcs));
+            return $app['twig']->render('users.form.html.twig');
     }
 }

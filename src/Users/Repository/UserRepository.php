@@ -3,9 +3,6 @@
 namespace App\Users\Repository;
 
 use App\Users\Entity\User;
-use App\Pc\Entity\Pc;
-
-use App\Pc\Repository;
 
 use Doctrine\DBAL\Connection;
 
@@ -22,6 +19,26 @@ class UserRepository
     public function __construct(Connection $db)
     {
         $this->db = $db;
+    }
+
+    public function connect($login, $password){
+      $queryBuilder = $this->db->createQueryBuilder();
+      $queryBuilder
+        ->select('u.*')
+        ->from('users','u')
+        ->where('login = :login')
+        ->setParameter(':login', $login)
+        ->where('password = :password')
+        ->setParameter(':password', $password);
+
+        $statement = $queryBuilder->execute();
+        $usersData = $statement->fetchAll();
+        $result = count($usersData);
+        if($result == 0 || $result > 1){
+          return "Erreur de login";
+        }
+        return true;
+
     }
 
    /**
@@ -45,9 +62,9 @@ class UserRepository
 
        $statement = $queryBuilder->execute();
        $usersData = $statement->fetchAll();
-       $pcr = new \App\Pc\Repository\PCRepository($this->db);
+
        foreach ($usersData as $userData) {
-           $userEntityList[$userData['id']] = new User($userData['id'], $userData['nom'], $userData['prenom'], $pcr->getNameById($userData['idpc']));
+           $userEntityList[$userData['id']] = new User($userData['id'], $userData['nom'], $userData['prenom'], $userData['login'], $userData['password']);
        }
 
        return $userEntityList;
@@ -71,15 +88,13 @@ class UserRepository
            ->setParameter(0, $id);
        $statement = $queryBuilder->execute();
        $userData = $statement->fetchAll();
-       $pcr = new \App\Pc\Repository\PCRepository($this->db);
 
-       return new User($userData[0]['id'], $userData[0]['nom'], $userData[0]['prenom'], $pcr->getNameById($userData[0]['idpc']));
+       return new User($userData[0]['id'], $userData[0]['nom'], $userData[0]['prenom'], $userData[0]['login'], $userData[0]['password']);
    }
 
     public function delete($id)
     {
         $queryBuilder = $this->db->createQueryBuilder();
-        $pcr = new \App\Pc\Repository\PCRepository($this->db);
 
         $queryBuilder
           ->delete('users')
@@ -97,8 +112,6 @@ class UserRepository
           ->where('id = :id')
           ->setParameter(':id', $parameters['id']);
 
-          $pcr = new \App\Pc\Repository\PCRepository($this->db);
-
         if ($parameters['nom']) {
             $queryBuilder
               ->set('nom', ':nom')
@@ -111,10 +124,16 @@ class UserRepository
             ->setParameter(':prenom', $parameters['prenom']);
         }
 
-        if ($parameters['idpc']) {
+        if ($parameters['login']) {
             $queryBuilder
-            ->set('idpc', ':idpc')
-            ->setParameter(':idpc', $pcr->getIdByOS($parameters['idpc']));
+            ->set('login', ':login')
+            ->setParameter(':login', $parameters['login']);
+        }
+
+        if ($parameters['password']) {
+            $queryBuilder
+            ->set('password', ':password')
+            ->setParameter(':password', $parameters['password']);
         }
 
         $statement = $queryBuilder->execute();
@@ -123,19 +142,22 @@ class UserRepository
     public function insert($parameters)
     {
         $queryBuilder = $this->db->createQueryBuilder();
-        $pcr = new \App\Pc\Repository\PCRepository($this->db);
+
         $queryBuilder
           ->insert('users')
           ->values(
               array(
                 'nom' => ':nom',
                 'prenom' => ':prenom',
-                'idpc' => ':idpc',
-              )
+                'login' => ':login',
+                'password' => ':password'
+                   )
           )
           ->setParameter(':nom', $parameters['nom'])
           ->setParameter(':prenom', $parameters['prenom'])
-          ->setParameter(':idpc', $pcr->getIdByOS($parameters['idpc']));
-        $statement = $queryBuilder->execute();
+          ->setParameter(':login', $parameters['login'])
+          ->setParameter(':password', $parameters['password']);
+
+          $statement = $queryBuilder->execute();
     }
 }

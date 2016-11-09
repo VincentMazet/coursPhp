@@ -10,14 +10,17 @@ class User
 
     protected $prenom;
 
-    protected $pc;
+    protected $login;
 
-    public function __construct($id, $nom, $prenom, $pc)
+    protected $password;
+
+    public function __construct($id, $nom, $prenom, $login, $password)
     {
         $this->id = $id;
         $this->prenom = $prenom;
         $this->nom = $nom;
-        $this->pc = $pc;
+        $this->login = $login;
+        $this->password = $password;
     }
 
     public function setId($id)
@@ -35,9 +38,14 @@ class User
         $this->prenom = $prenom;
     }
 
-        public function setPC($pc)
+    public function setLogin($login)
     {
-        $this->pc = $pc;
+        $this->login = $login;
+    }
+
+    public function setPassword($password)
+    {
+        $this->password = $password;
     }
 
     public function getId()
@@ -51,11 +59,15 @@ class User
     public function getNom()
     {
         return $this->nom;
-    }
-        public function getPC()
+    }  
+    public function getLogin()
     {
-        return $this->pc;
-    }
+        return $this->login;
+    } 
+    public function getPassword()
+    {
+        return $this->password;
+    }  
 
     public function toArray()
     {
@@ -63,7 +75,8 @@ class User
         $array['id'] = $this->id;
         $array['nom'] = $this->nom;
         $array['prenom'] = $this->prenom;
-        $array['pc'] = $this->pc;
+        $array['password'] = $this->password;
+        $array['login'] = $this->login;
 
         return $array;
     }
