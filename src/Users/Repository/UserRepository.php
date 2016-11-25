@@ -49,7 +49,7 @@ class UserRepository
         if($result == 0 || $result > 1){
           return new Response('Connexion Error', 403, array('X-Status-Code' => 200));
         }
-        $user = new User($userData[0]['id'], $userData[0]['nom'], $userData[0]['prenom'], $userData[0]['login'], $userData[0]['password']);
+        $user = new User($userData[0]['id'], $userData[0]['lastName'], $userData[0]['firstName'], $userData[0]['login'], $userData[0]['password']);
        return json_encode($user->toArray());
 
     }
@@ -77,7 +77,7 @@ class UserRepository
        $usersData = $statement->fetchAll();
 
        foreach ($usersData as $userData) {
-           $userEntityList[$userData['id']] = new User($userData['id'], $userData['nom'], $userData['prenom'], $userData['login'], $userData['password']);
+           $userEntityList[$userData['id']] = new User($userData['id'], $userData['lastName'], $userData['firstName'], $userData['login'], $userData['password']);
        }
 
        return $userEntityList;
@@ -102,7 +102,7 @@ class UserRepository
        $statement = $queryBuilder->execute();
        $userData = $statement->fetchAll();
 
-       return new User($userData[0]['id'], $userData[0]['nom'], $userData[0]['prenom'], $userData[0]['login'], $userData[0]['password']);
+       return new User($userData[0]['id'], $userData[0]['lastName'], $userData[0]['firstName'], $userData[0]['login'], $userData[0]['password']);
    }
 
     public function delete($id)
@@ -125,16 +125,16 @@ class UserRepository
           ->where('id = :id')
           ->setParameter(':id', $parameters['id']);
 
-        if ($parameters['nom']) {
+        if ($parameters['lastName']) {
             $queryBuilder
-              ->set('nom', ':nom')
-              ->setParameter(':nom', $parameters['nom']);
+              ->set('nom', ':lastName')
+              ->setParameter(':lastName', $parameters['lastName']);
         }
 
-        if ($parameters['prenom']) {
+        if ($parameters['firstName']) {
             $queryBuilder
-            ->set('prenom', ':prenom')
-            ->setParameter(':prenom', $parameters['prenom']);
+            ->set('prenom', ':firstName')
+            ->setParameter(':firstName', $parameters['firstName']);
         }
 
         if ($parameters['login']) {
@@ -162,14 +162,14 @@ class UserRepository
           ->insert('users')
           ->values(
               array(
-                'nom' => ':nom',
-                'prenom' => ':prenom',
+                'nom' => ':lastName',
+                'prenom' => ':firstName',
                 'login' => ':login',
                 'password' => ':password'
                    )
           )
-          ->setParameter(':nom', $parameters['nom'])
-          ->setParameter(':prenom', $parameters['prenom'])
+          ->setParameter(':lastName', $parameters['lastName'])
+          ->setParameter(':firstName', $parameters['firstName'])
           ->setParameter(':login', $parameters['login'])
           ->setParameter(':password', $parameters['password']);
 
