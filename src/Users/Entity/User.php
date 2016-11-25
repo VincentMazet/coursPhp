@@ -6,19 +6,19 @@ class User
 {
     protected $id;
 
-    protected $nom;
+    protected $lastName;
 
-    protected $prenom;
+    protected $firstName;
 
     protected $login;
 
     protected $password;
 
-    public function __construct($id, $nom, $prenom, $login, $password)
+    public function __construct($id, $lastName, $firstName, $login, $password)
     {
         $this->id = $id;
-        $this->prenom = $prenom;
-        $this->nom = $nom;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
         $this->login = $login;
         $this->password = $password;
     }
@@ -28,14 +28,14 @@ class User
         $this->id = $id;
     }
 
-    public function setNom($nom)
+    public function setLastName($lastName)
     {
-        $this->nom = $nom;
+        $this->lastName = $lastName;
     }
 
-    public function setPrenom($prenom)
+    public function setFirstName($firstName)
     {
-        $this->prenom = $prenom;
+        $this->firstName = $firstName;
     }
 
     public function setLogin($login)
@@ -52,13 +52,13 @@ class User
     {
         return $this->id;
     }
-    public function getPrenom()
+    public function getFirstName()
     {
-        return $this->prenom;
+        return $this->firstName;
     }
-    public function getNom()
+    public function getLastName()
     {
-        return $this->nom;
+        return $this->lastName;
     }  
     public function getLogin()
     {
@@ -73,8 +73,8 @@ class User
     {
         $array = array();
         $array['id'] = $this->id;
-        $array['nom'] = $this->nom;
-        $array['prenom'] = $this->prenom;
+        $array['lastName'] = $this->lastName;
+        $array['firstName'] = $this->firstName;
         $array['password'] = $this->password;
         $array['login'] = $this->login;
 
