@@ -6,4 +6,4 @@ $app->get('/users/new', 'App\Users\Controller\IndexController::newAction')->bind
 $app->post('/users/delete/{id}', 'App\Users\Controller\IndexController::deleteAction')->bind('users.delete');
 $app->post('/users/save', 'App\Users\Controller\IndexController::saveAction')->bind('users.save');
 $app->post('/users/login','App\Users\Controller\IndexController::loginAction')->bind('users.login');
-$app->get('/passage/list','App\Passage\Controller\IndexController::listAction')->bind('passage.list');
+$app->get('/passage/line','App\Passage\Controller\IndexController::getLine')->bind('passage.line');
