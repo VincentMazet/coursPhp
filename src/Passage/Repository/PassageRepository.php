@@ -12,7 +12,7 @@ use Doctrine\DBAL\Connection;
 /**
  * Passage repository.
  */
-class UserRepository
+class PassageRepository
 {
     /**
      * @var \Doctrine\DBAL\Connection
@@ -31,24 +31,29 @@ class UserRepository
     *   The id of the line that we want.
     * @return a json array of passages or an error;
     */
-    public function getLine($idLine){
+    public function getLine($num_line){
       $queryBuilder = $this->db->createQueryBuilder();
       $queryBuilder
         ->select('p.*')
-        ->from('passage','p')
-        ->where('id = :idLind')
-        ->setParameter(':idLine', $idLine);
+        ->from('passages','p')
+        ->where('num_line = :num_line')
+        ->setParameter(':num_line', $num_line);
 
         $statement = $queryBuilder->execute();
         $lineDatas = $statement->fetchAll();
         $result = count($lineDatas);
         if($result == 0 ){
-          return new Response('No line with this id :'.$idLine, 403, array('X-Status-Code' => 200));
+          return new Response('No line with this id :'.$num_line, 403, array('X-Status-Code' => 200));
         }
         foreach ($lineDatas as $lineData) {
-           $passageEntityList[$lineData['id']] = new Passage($lineData['id'], $lineData['nameStop'], $lineData['numLine'], $lineData['hour'], $lineData['nextStop'], $previousStop);
+          $passage = new Passage($lineData['id'], $lineData['name_stop'], $lineData['num_line'], $lineData['hour'], $lineData['next_stop'], $lineData['previous_stop']);
+           $passageEntityList[$lineData['id']] = $passage->toArray();
+
        }
               //return json_encode($user->toArray());
-       return $passageEntityList;
+       return json_encode($passageEntityList);
     }
+
+    
+
 }

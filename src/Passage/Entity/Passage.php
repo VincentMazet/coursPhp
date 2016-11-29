@@ -65,14 +65,14 @@ class Passage
     {
         return $this->nameStop;
     }
-    public function getNumLine)
+    public function getNumLine()
     {
-        return $this->numLine
-    } 
+        return $this->numLine;
+    }
     public function getHour()
     {
         return $this->hour;
-    }   
+    }
     public function getNextStop()
     {
         return $this->nextStop;
@@ -80,7 +80,7 @@ class Passage
     public function getPreviousStop()
     {
         return $this->previousStop;
-    } 
+    }
     public function toArray()
     {
         $array = array();

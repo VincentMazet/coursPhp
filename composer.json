@@ -17,8 +17,9 @@
          "App\\Users\\Controller\\": "src/Users/Controller/",
          "App\\Users\\Repository\\": "src/Users/Repository/",
          "App\\Users\\Entity\\": "src/Users/Entity/",
-         "App\\Pc\\Repository\\": "src/Pc/Repository/",
-         "App\\Pc\\Entity\\": "src/Pc/Entity/"
+         "App\\Passage\\Controller\\": "src/Passage/Controller/",
+         "App\\Passage\\Repository\\": "src/Passage/Repository/",
+         "App\\Passage\\Entity\\": "src/Passage/Entity/"
        }
    }
 }

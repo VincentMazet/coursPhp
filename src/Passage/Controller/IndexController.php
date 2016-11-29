@@ -9,11 +9,15 @@ class IndexController
 {
 	public function getLine(Request $request, Application $app)
 	    {
-		$parameters = $request->request->all();
-       		 $idLine = $parameters['id_line'];
- 		 $result = $app['repository.passage']->getLine($idLine);
+		$parameters = $num_line = $request->get('num_line');
+    $num_line = $parameters;
+ 		 $result = $app['repository.passage']->getLine($num_line);
 
 		return $result;
 	    }
+
+			public function test(){
+				return "OK";
+			}
 
 }
