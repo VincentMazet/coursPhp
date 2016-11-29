@@ -54,6 +54,66 @@ class PassageRepository
        return json_encode($passageEntityList);
     }
 
-    
+    public function getAllStops(){
+      $queryBuilder = $this->db->createQueryBuilder();
+      $queryBuilder
+        ->select('p.*')
+        ->from('passages','p');
+
+        $statement = $queryBuilder->execute();
+        $lineDatas = $statement->fetchAll();
+        foreach ($lineDatas as $lineData) {
+          $passage = new Passage($lineData['id'], $lineData['name_stop'], $lineData['num_line'], $lineData['hour'], $lineData['next_stop'], $lineData['previous_stop']);
+          $passageEntityList[$lineData['id']] = $passage->toArray();
+
+       }
+       return json_encode($passageEntityList);
+    }
+
+    public function getStopNameById($id)
+    {
+      $queryBuilder = $this->db->createQueryBuilder();
+      $queryBuilder
+        ->select('p.name_stop')
+        ->from('passages','p')
+        ->where('id = :id')
+        ->setParameter(':id', $id);
+        $statement = $queryBuilder->execute();
+        $lineDatas = $statement->fetchAll();
+
+       return json_encode($lineDatas);
+    }
+
+    public function getNextStop($id)
+    {
+      $queryBuilder = $this->db->createQueryBuilder();
+      $queryBuilder
+        ->select('p.next_stop')
+        ->from('passages','p')
+        ->where('id = :id')
+        ->setParameter(':id', $id);
+        $statement = $queryBuilder->execute();
+        $lineDatas = $statement->fetchAll();
+
+       return json_encode($lineDatas);
+    }
+
+    public function getPreviousStop($id){
+      $queryBuilder = $this->db->createQueryBuilder();
+      $queryBuilder
+        ->select('p.previous_stop')
+        ->from('passages','p')
+        ->where('id = :id')
+        ->setParameter(':id', $id);
+        $statement = $queryBuilder->execute();
+        $lineDatas = $statement->fetchAll();
+
+       return json_encode($lineDatas);
+    }
+
+
+
+
+
 
 }
