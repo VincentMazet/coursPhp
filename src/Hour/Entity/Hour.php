@@ -14,13 +14,15 @@ class Hour
 
     protected $hour;
 
-    public function __construct($id, $idStop, $idLine, $hour)
+    protected $depart;
+
+    public function __construct($id, $idStop, $idLine, $hour, $depart)
     {
         $this->id = $id;
         $this->idStop = $idStop;
         $this->idLine = $idLine;
         $this->hour = $hour;
-
+        $this->depart = $depart;
 
     }
 
@@ -39,9 +41,19 @@ class Hour
         $this->idLine = $idLine;
     }
 
+    public function setDirection($direction)
+    {
+      $this->direction = $direction;
+    }
+
     public function sethour($hour)
     {
         $this->hour = $hour;
+    }
+
+    public function setDepart($depart)
+    {
+      $this->depart = $depart;
     }
 
     public function getId()
@@ -59,11 +71,20 @@ class Hour
         return $this->idLine;
     }
 
+    public function getDirection()
+    {
+        return $this->direction;
+    }
+
     public function gethour()
     {
         return $this->hour;
     }
 
+    public function getDepart()
+    {
+        return $this->depart;
+    }
 
     public function toArray()
     {
@@ -71,7 +92,9 @@ class Hour
         $array['id'] = $this->id;
         $array['idStop'] = $this->idStop;
         $array['idLine'] = $this->idLine;
+        $array['direction'] = $this->direction;
         $array['hour'] = $this->hour;
+        $array['depart'] = $this->depart;
 
         return $array;
     }

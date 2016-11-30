@@ -33,15 +33,15 @@ class IndexController
     {
         $users = $app['repository.user']->getAll();
 
-        return $app['twig']->render('users.list.html.twig', array('users' => $users));
+        return $users;
     }
 
     public function deleteAction(Request $request, Application $app)
     {
         $parameters = $request->attributes->all();
-        $app['repository.user']->delete($parameters['id']);
 
-        return $app->redirect($app['url_generator']->generate('users.list'));
+
+        return $app['repository.user']->delete($parameters['id']);
     }
 
     public function editAction(Request $request, Application $app)
@@ -49,7 +49,7 @@ class IndexController
         $parameters = $request->attributes->all();
         $user = $app['repository.user']->getById($parameters['id']);
 
-        return $app['twig']->render('users.form.html.twig', array('user' => $user));
+        return $user;
     }
 
     public function saveAction(Request $request, Application $app)

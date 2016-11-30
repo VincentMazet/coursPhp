@@ -6,5 +6,5 @@ $app->get('/users/new', 'App\Users\Controller\IndexController::newUser')->bind('
 $app->post('/users/delete/{id}', 'App\Users\Controller\IndexController::deleteAction')->bind('users.delete');
 $app->post('/users/save', 'App\Users\Controller\IndexController::saveAction')->bind('users.save');
 $app->get('/users/login','App\Users\Controller\IndexController::loginAction')->bind('users.login');
-$app->get('/Line/TravelStopId','App\Line\Controller\IndexController::getTravelStopId')->bind('line.TravelStopId');
+$app->get('/Hour/TravelStopId','App\Hour\Controller\IndexController::getTravelStopId')->bind('hour.TravelStopId');
 $app->get('/Hour/list','App\Hour\Controller\IndexController::listAction')->bind('hour.list');

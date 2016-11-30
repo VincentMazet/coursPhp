@@ -79,11 +79,11 @@ class UserRepository
          return new Response('No result', 403, array('X-Status-Code' => 200));
        }
        foreach ($usersData as $userData) {
-           $userEntityList[$userData['id']] = new User($userData['id'], $userData['last_name'], $userData['first_name'], $userData['login'], $userData['password']);
+           $userEntityList[$userData['id']] = (new User($userData['id'], $userData['last_name'], $userData['first_name'], $userData['login'], $userData['password']))->toArray();
        }
 
 
-       return $userEntityList;
+       return json_encode($userEntityList);
    }
 
    /**

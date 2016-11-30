@@ -14,4 +14,14 @@ class IndexController
       return $hours;
     }
 
+    public function getTravelStopId(Request $request, Application $app)
+    {
+          $parameters['idStartStop'] = $request->get('idStartStop');
+          $parameters['idEndStop'] = $request->get('idEndStop');
+          $result = $app['repository.hour']->getTravelStopId($parameters);
+          return $result;
+
+    }
+
+
 }

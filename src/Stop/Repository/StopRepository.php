@@ -14,15 +14,17 @@ use Doctrine\DBAL\Connection;
  */
 class StopRepository
 {
-    /**
-     * @var \Doctrine\DBAL\Connection
-     */
-    protected $db;
+  /**
+   * @var \Doctrine\DBAL\Connection
+   */
+  protected $db;
 
-    public function __construct(Connection $db)
-    {
-        $this->db = $db;
-    }
+  public function __construct(Connection $db)
+  {
+      $this->db = $db;
+  }
+
+
 
 
 

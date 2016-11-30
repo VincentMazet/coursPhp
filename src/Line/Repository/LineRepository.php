@@ -26,20 +26,6 @@ class LineRepository
 
 
 
-    public function getTravelStopId($idStartStop, $idEndStop){
-      $queryBuilder = $this->db->createQueryBuilder();
-      $queryBuilder
-        ->select('p.previous_stop')
-        ->from('passages','p')
-        ->where('id = :id')
-        ->setParameter(':id', $id);
-        $statement = $queryBuilder->execute();
-        $lineDatas = $statement->fetchAll();
-
-       return json_encode($lineDatas);
-    }
-
-
 
 
 
