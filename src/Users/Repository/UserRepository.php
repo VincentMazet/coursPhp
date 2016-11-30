@@ -75,10 +75,13 @@ class UserRepository
 
        $statement = $queryBuilder->execute();
        $usersData = $statement->fetchAll();
-
-       foreach ($usersData as $userData) {
-           $userEntityList[$userData['id']] = new User($userData['id'], $userData['lastName'], $userData['firstName'], $userData['login'], $userData['password']);
+       if (count($usersData) == 0){
+         return new Response('No result', 403, array('X-Status-Code' => 200));
        }
+       foreach ($usersData as $userData) {
+           $userEntityList[$userData['id']] = new User($userData['id'], $userData['last_name'], $userData['first_name'], $userData['login'], $userData['password']);
+       }
+
 
        return $userEntityList;
    }
@@ -162,18 +165,45 @@ class UserRepository
           ->insert('users')
           ->values(
               array(
-                'nom' => ':lastName',
-                'prenom' => ':firstName',
+                'last_name' => ':nom',
+                'first_name' => ':prenom',
                 'login' => ':login',
                 'password' => ':password'
                    )
           )
-          ->setParameter(':lastName', $parameters['lastName'])
-          ->setParameter(':firstName', $parameters['firstName'])
+          ->setParameter(':nom', $parameters['lastName'])
+          ->setParameter(':prenom', $parameters['firstName'])
           ->setParameter(':login', $parameters['login'])
           ->setParameter(':password', $parameters['password']);
 
           $statement = $queryBuilder->execute();
+    }
+
+    public function newUser($parameters)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+
+        if($this->loginAlreadyExist($parameters['login'])){
+          return new Response('Login Already exist', 403, array('X-Status-Code' => 200));
+        }
+
+        $queryBuilder
+          ->insert('users')
+          ->values(
+              array(
+                'last_name' => ':nom',
+                'first_name' => ':prenom',
+                'login' => ':login',
+                'password' => ':password'
+                   )
+          )
+          ->setParameter(':nom', $parameters['lastName'])
+          ->setParameter(':prenom', $parameters['firstName'])
+          ->setParameter(':login', $parameters['login'])
+          ->setParameter(':password', $parameters['password']);
+
+          $statement = $queryBuilder->execute();
+          return 'ok';
     }
 
     private function loginAlreadyExist($login)
@@ -190,8 +220,8 @@ class UserRepository
       $userData = $statement->fetchAll();
       $result = count($userData);
       if($result != 0){
-         return new Response('login Already Exist', 409, array('X-Status-Code' => 200));
-         die;       
+         return true;
+
        }
     }
 }

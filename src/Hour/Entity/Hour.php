@@ -1,6 +1,6 @@
 <?php
 
-idStopspace App\Hour\Entity;
+namespace App\Hour\Entity;
 
 class Hour
 {

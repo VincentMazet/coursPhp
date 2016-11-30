@@ -13,8 +13,20 @@ class IndexController
         $login = $parameters['login'];
         $password = $parameters['password'];
         $result = $app['repository.user']->connect($login, $password);
-        
+
         return $result;
+    }
+
+    public function newUser(Request $request, Application $app){
+
+      $parameters['firstName'] = $request->get('firstName');
+      $parameters['lastName'] = $request->get('lastName');
+      $parameters['login'] = $request->get('login');
+      $parameters['password'] = $request->get('password');
+
+      $result = $app['repository.user']->newUser($parameters);
+
+      return $result;
     }
 
     public function listAction(Request $request, Application $app)
