@@ -9,12 +9,12 @@ class IndexController
 {
     public function loginAction(Request $request, Application $app)
     {
-        $parameters = $request->request->all();
-        $login = $parameters['login'];
-        $password = $parameters['password'];
-        $result = $app['repository.user']->connect($login, $password);
+      $parameters['login'] = $request->get('login');
+      $parameters['password'] = $request->get('password');
 
-        return $result;
+      $result = $app['repository.user']->connect($parameters);
+
+      return $result;
     }
 
     public function newUser(Request $request, Application $app){

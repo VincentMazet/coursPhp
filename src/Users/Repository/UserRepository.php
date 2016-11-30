@@ -33,15 +33,15 @@ class UserRepository
     *   The password of the user to connect.
     * @return a json array of the user or an error;
     */
-    public function connect($login, $password){
+    public function connect($parameters){
       $queryBuilder = $this->db->createQueryBuilder();
       $queryBuilder
         ->select('u.*')
         ->from('users','u')
         ->where('login = :login')
-        ->setParameter(':login', $login)
+        ->setParameter(':login', $parameters['login'])
         ->where('password = :password')
-        ->setParameter(':password', $password);
+        ->setParameter(':password', $parameters['password']);
 
         $statement = $queryBuilder->execute();
         $userData = $statement->fetchAll();
@@ -49,7 +49,7 @@ class UserRepository
         if($result == 0 || $result > 1){
           return new Response('Connexion Error', 403, array('X-Status-Code' => 200));
         }
-        $user = new User($userData[0]['id'], $userData[0]['lastName'], $userData[0]['firstName'], $userData[0]['login'], $userData[0]['password']);
+        $user = new User($userData[0]['id'], $userData[0]['last_name'], $userData[0]['first_name'], $userData[0]['login'], $userData[0]['password']);
        return json_encode($user->toArray());
 
     }
@@ -153,30 +153,6 @@ class UserRepository
         }
 
         $statement = $queryBuilder->execute();
-    }
-
-    public function insert($parameters)
-    {
-        $queryBuilder = $this->db->createQueryBuilder();
-
-        $this->loginAlreadyExist($parameters['login']);
-
-        $queryBuilder
-          ->insert('users')
-          ->values(
-              array(
-                'last_name' => ':nom',
-                'first_name' => ':prenom',
-                'login' => ':login',
-                'password' => ':password'
-                   )
-          )
-          ->setParameter(':nom', $parameters['lastName'])
-          ->setParameter(':prenom', $parameters['firstName'])
-          ->setParameter(':login', $parameters['login'])
-          ->setParameter(':password', $parameters['password']);
-
-          $statement = $queryBuilder->execute();
     }
 
     public function newUser($parameters)
