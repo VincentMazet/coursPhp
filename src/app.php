@@ -20,3 +20,11 @@ $app['repository.user'] = function ($app) {
 $app['repository.line'] = function ($app) {
     return new App\Line\Repository\LineRepository($app['db']);
 };
+
+$app['repository.stop'] = function ($app) {
+    return new App\Stop\Repository\StopRepository($app['db']);
+};
+
+$app['repository.hour'] = function ($app) {
+    return new App\Hour\Repository\HourRepository($app['db']);
+};
