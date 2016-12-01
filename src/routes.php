@@ -10,3 +10,5 @@ $app->get('/Hour/TravelStopId','App\Hour\Controller\IndexController::getTravelSt
 $app->get('/Stop/TravelStopId','App\Stop\Controller\IndexController::getStopForTravel')->bind('stop.TravelStopId');
 $app->get('/Hour/list','App\Hour\Controller\IndexController::listAction')->bind('hour.list');
 $app->get('/Stop/All','App\Stop\Controller\IndexController::getAll')->bind('stop.list');
+$app->get('/Hour/getHoursBetweenStops','App\Hour\Controller\IndexController::getHoursBetweenStops')->bind('hour.getHoursBetweenStops');
+

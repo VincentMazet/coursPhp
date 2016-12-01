@@ -14,6 +14,15 @@ class IndexController
       return $hours;
     }
 
+    public function getHoursBetweenStops(Request $request, Application $app){
+    	$parameters['idStartStop'] = $request->get('idStartStop');
+        $parameters['idEndStop'] = $request->get('idEndStop');
+
+    	$result = $app['repository.hour']->getHoursBetweenStops($parameters);
+
+    	return $result;
+    }
+
 
 
 }
