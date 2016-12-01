@@ -40,11 +40,11 @@ class HourRepository
 
         return json_encode($hourEntityList);
     }
-
+    //FIXME : ATTENTION HARDCODING degeulasse
     public function getHoursBetweenStops($parameters)
     {
-       $time =  date("H:m");
-       $time = "12:00";
+       $time =  date('H:m');
+     //  $time = "12:00"; //FOR TEST
         $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
             ->select('h.*')
@@ -55,12 +55,19 @@ class HourRepository
             ->setParameter(':idEndStop', $parameters['idEndStop']); 
         $statement = $queryBuilder->execute();
         $hoursData = $statement->fetchAll();
+
+        $hourStartList = null;
+        $hourEndList = null;
+
         foreach ($hoursData as $hourData) {
-            if(strtotime($hourData['hour']) >= strtotime($time)){
-                $diff = abs(strtotime($hourData['hour']) - strtotime($time)) / 60,2);
-                $hourEntityList[$hourData['id']] = (new Hour($hourData['id'], $hourData['id_stop'], $hourData['id_line'], $hourData['hour']))->toArray();
+            if($hourStartList == null && $hourData['id_stop'] == $parameters['idStartStop'] && strtotime($hourData['hour']) >= strtotime($time)) {
+                $hourStartList = $hourData;
+            }else if($hourEndList == null && $hourData['id_stop'] == $parameters['idEndStop'] && strtotime($hourData['hour']) >= strtotime($time)) {
+                $hourEndList = $hourData;
             }
         }
+        $hourEntityList[$hourStartList['id']] = (new Hour($hourStartList['id'], $hourStartList['id_stop'], $hourStartList['id_line'], $hourStartList['hour']))->toArray();
+        $hourEntityList[$hourEndList['id']] = (new Hour($hourEndList['id'], $hourEndList['id_stop'], $hourEndList['id_line'], $hourEndList['hour']))->toArray();
         return json_encode($hourEntityList);
     }
 }
