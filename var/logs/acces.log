@@ -1121,3 +1121,119 @@
 ::1 - - [30/Nov/2016:16:49:51 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 200 944
 ::1 - - [30/Nov/2016:16:50:14 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 200 862
 ::1 - - [30/Nov/2016:16:50:47 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 200 43378
+::1 - - [30/Nov/2016:17:11:08 +0100] "GET /index.php/users/list HTTP/1.1" 200 88
+::1 - - [01/Dec/2016:08:32:33 +0100] "GET /index.php/passages/list HTTP/1.1" 404 13427
+::1 - - [01/Dec/2016:08:32:34 +0100] "GET /favicon.ico HTTP/1.1" 404 209
+::1 - - [01/Dec/2016:08:32:53 +0100] "-" 408 -
+::1 - - [01/Dec/2016:08:32:58 +0100] "GET /index.php/Hour/list HTTP/1.1" 200 24377
+::1 - - [01/Dec/2016:08:33:18 +0100] "-" 408 -
+::1 - - [01/Dec/2016:08:33:18 +0100] "-" 408 -
+::1 - - [01/Dec/2016:08:33:18 +0100] "-" 408 -
+::1 - - [01/Dec/2016:08:33:57 +0100] "GET /index.php/Hour/list HTTP/1.1" 200 8697
+::1 - - [01/Dec/2016:08:34:17 +0100] "-" 408 -
+::1 - - [01/Dec/2016:08:34:17 +0100] "-" 408 -
+::1 - - [01/Dec/2016:08:34:27 +0100] "GET /index.php/Hour/listAll HTTP/1.1" 404 13423
+::1 - - [01/Dec/2016:08:34:41 +0100] "-" 408 -
+::1 - - [01/Dec/2016:08:34:41 +0100] "-" 408 -
+::1 - - [01/Dec/2016:08:34:46 +0100] "GET /index.php/Hour/TravelStopId HTTP/1.1" 200 32556
+::1 - - [01/Dec/2016:08:35:51 +0100] "GET /index.php/Hour/TravelStopId HTTP/1.1" 200 32556
+::1 - - [01/Dec/2016:08:35:58 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=6&idEndStop=5 HTTP/1.1" 200 32556
+::1 - - [01/Dec/2016:08:36:14 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 200 43378
+::1 - - [01/Dec/2016:08:36:31 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 200 43378
+::1 - - [01/Dec/2016:08:36:32 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 200 43378
+::1 - - [01/Dec/2016:08:37:46 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 200 4959
+::1 - - [01/Dec/2016:08:44:34 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 200 4959
+::1 - - [01/Dec/2016:08:44:36 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 200 4959
+::1 - - [01/Dec/2016:08:44:38 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 200 4959
+::1 - - [01/Dec/2016:08:44:54 +0100] "-" 408 -
+::1 - - [01/Dec/2016:08:46:44 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 200 8524
+::1 - - [01/Dec/2016:08:46:52 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 200 7
+::1 - - [01/Dec/2016:08:47:06 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 200 441
+::1 - - [01/Dec/2016:08:47:25 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 200 441
+::1 - - [01/Dec/2016:08:50:14 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 200 149
+::1 - - [01/Dec/2016:08:50:32 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 200 56
+::1 - - [01/Dec/2016:09:20:31 +0100] "GET /index.php/Hour/list HTTP/1.1" 500 16587
+::1 - - [01/Dec/2016:09:21:10 +0100] "GET /index.php/Hour/list HTTP/1.1" 500 17197
+::1 - - [01/Dec/2016:09:22:36 +0100] "GET /index.php/Hour/list HTTP/1.1" 500 17324
+::1 - - [01/Dec/2016:09:22:51 +0100] "GET /index.php/Hour/list HTTP/1.1" 500 17311
+::1 - - [01/Dec/2016:09:23:04 +0100] "GET /index.php/Hour/list HTTP/1.1" 500 17233
+::1 - - [01/Dec/2016:09:23:11 +0100] "GET /index.php/Hour/list HTTP/1.1" 200 5757
+::1 - - [01/Dec/2016:09:23:34 +0100] "GET /index.php/Hour/list HTTP/1.1" 200 35949
+::1 - - [01/Dec/2016:09:24:06 +0100] "GET /index.php/Hour/list HTTP/1.1" 500 17280
+::1 - - [01/Dec/2016:09:24:37 +0100] "GET /index.php/Hour/list HTTP/1.1" 500 17262
+::1 - - [01/Dec/2016:09:25:28 +0100] "GET /index.php/Hour/list HTTP/1.1" 500 17271
+::1 - - [01/Dec/2016:09:31:23 +0100] "GET /index.php/Hour/list HTTP/1.1" 200 5757
+::1 - - [01/Dec/2016:09:32:00 +0100] "GET /index.php/Hour/list HTTP/1.1" 500 17334
+::1 - - [01/Dec/2016:09:32:33 +0100] "GET /index.php/Hour/list HTTP/1.1" 200 5757
+::1 - - [01/Dec/2016:09:33:07 +0100] "GET /index.php/Hour/list HTTP/1.1" 200 5757
+::1 - - [01/Dec/2016:09:33:22 +0100] "GET /index.php/Hour/list HTTP/1.1" 500 17334
+::1 - - [01/Dec/2016:09:34:34 +0100] "GET /index.php/Hour/list HTTP/1.1" 500 17334
+::1 - - [01/Dec/2016:09:34:55 +0100] "GET /index.php/Hour/list HTTP/1.1" 200 5757
+::1 - - [01/Dec/2016:09:36:59 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=6&idEndStop=5 HTTP/1.1" 500 17106
+::1 - - [01/Dec/2016:09:37:19 +0100] "-" 408 -
+::1 - - [01/Dec/2016:09:38:11 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=6&idEndStop=5 HTTP/1.1" 200 104
+::1 - - [01/Dec/2016:09:54:03 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=6&idEndStop=5 HTTP/1.1" 500 6668
+::1 - - [01/Dec/2016:09:54:26 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=6&idEndStop=5 HTTP/1.1" 500 6668
+::1 - - [01/Dec/2016:09:54:43 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=6&idEndStop=5 HTTP/1.1" 500 6668
+::1 - - [01/Dec/2016:09:54:47 +0100] "GET /index.php/Hour/TravelStopId?idStartStop=2&idEndStop=5 HTTP/1.1" 500 6668
+::1 - - [01/Dec/2016:09:55:07 +0100] "-" 408 -
+::1 - - [01/Dec/2016:09:55:19 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=2&idEndStop=5 HTTP/1.1" 500 6674
+::1 - - [01/Dec/2016:09:55:34 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=2&idEndStop=5 HTTP/1.1" 500 6674
+::1 - - [01/Dec/2016:09:55:43 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=2&idEndStop=5 HTTP/1.1" 500 6674
+::1 - - [01/Dec/2016:09:56:00 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=2&idEndStop=5 HTTP/1.1" 200 217
+::1 - - [01/Dec/2016:09:56:22 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=2&idEndStop=5 HTTP/1.1" 200 20404831
+::1 - - [01/Dec/2016:09:57:20 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=2&idEndStop=5 HTTP/1.1" 200 23
+::1 - - [01/Dec/2016:09:57:37 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=2&idEndStop=5 HTTP/1.1" 200 30
+::1 - - [01/Dec/2016:09:57:57 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=2&idEndStop=5 HTTP/1.1" 200 30
+::1 - - [01/Dec/2016:09:58:02 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=8&idEndStop=5 HTTP/1.1" 200 30
+::1 - - [01/Dec/2016:09:58:19 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=15&idEndStop=5 HTTP/1.1" 200 85
+::1 - - [01/Dec/2016:09:58:39 +0100] "-" 408 -
+::1 - - [01/Dec/2016:10:03:13 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=15&idEndStop=5 HTTP/1.1" 500 6792
+::1 - - [01/Dec/2016:10:03:45 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=15&idEndStop=5 HTTP/1.1" 200 637
+::1 - - [01/Dec/2016:10:04:12 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=15&idEndStop=5 HTTP/1.1" 200 161
+::1 - - [01/Dec/2016:10:04:27 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=15&idEndStop=5 HTTP/1.1" 200 -
+::1 - - [01/Dec/2016:10:04:35 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=8&idEndStop=5 HTTP/1.1" 200 30
+::1 - - [01/Dec/2016:10:04:41 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 200 16
+::1 - - [01/Dec/2016:10:05:01 +0100] "-" 408 -
+::1 - - [01/Dec/2016:10:06:43 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 500 6169
+::1 - - [01/Dec/2016:10:07:24 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 200 15
+::1 - - [01/Dec/2016:10:07:31 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 500 6169
+::1 - - [01/Dec/2016:10:08:34 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 500 6107
+::1 - - [01/Dec/2016:10:08:49 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=4&idEndStop=5 HTTP/1.1" 200 7
+::1 - - [01/Dec/2016:10:09:02 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=1&idEndStop=5 HTTP/1.1" 200 13
+::1 - - [01/Dec/2016:10:09:11 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=15&idEndStop=5 HTTP/1.1" 403 12
+::1 - - [01/Dec/2016:10:09:15 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=8&idEndStop=5 HTTP/1.1" 200 11
+::1 - - [01/Dec/2016:10:09:31 +0100] "-" 408 -
+::1 - - [01/Dec/2016:10:10:33 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=8&idEndStop=5 HTTP/1.1" 200 11
+::1 - - [01/Dec/2016:10:10:38 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=1&idEndStop=5 HTTP/1.1" 200 11
+::1 - - [01/Dec/2016:10:10:58 +0100] "-" 408 -
+::1 - - [01/Dec/2016:10:14:33 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=8&idEndStop=5 HTTP/1.1" 200 9
+::1 - - [01/Dec/2016:10:14:39 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=8&idEndStop=15 HTTP/1.1" 403 12
+::1 - - [01/Dec/2016:10:14:46 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=-10&idEndStop=15 HTTP/1.1" 403 12
+::1 - - [01/Dec/2016:10:14:51 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=e,&idEndStop=15 HTTP/1.1" 403 12
+::1 - - [01/Dec/2016:10:15:03 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=1&idEndStop=7 HTTP/1.1" 200 15
+::1 - - [01/Dec/2016:10:15:23 +0100] "-" 408 -
+::1 - - [01/Dec/2016:13:22:52 +0100] "GET /index.php/Stop/TravelStopId?idStartStop=1&idEndStop=7 HTTP/1.1" 200 15
+::1 - - [01/Dec/2016:13:30:04 +0100] "GET /index.php/Stop/All HTTP/1.1" 200 1280
+::1 - - [01/Dec/2016:13:30:19 +0100] "GET /index.php/Stop/All HTTP/1.1" 200 6968
+::1 - - [01/Dec/2016:13:30:25 +0100] "GET /index.php/Stop/All HTTP/1.1" 200 1280
+::1 - - [01/Dec/2016:13:31:07 +0100] "GET /index.php/Stop/All HTTP/1.1" 200 1280
+::1 - - [01/Dec/2016:14:00:52 +0100] "GET /index.php/Stop/All HTTP/1.1" 200 1280
+::1 - - [01/Dec/2016:14:01:07 +0100] "GET /index.php/Stop/All HTTP/1.1" 200 -
+::1 - - [01/Dec/2016:14:01:27 +0100] "-" 408 -
+::1 - - [01/Dec/2016:14:01:29 +0100] "GET /index.php/Stop/All HTTP/1.1" 200 1456
+::1 - - [01/Dec/2016:14:01:49 +0100] "-" 408 -
+::1 - - [01/Dec/2016:14:02:03 +0100] "GET /index.php/Stop/All HTTP/1.1" 200 8
+::1 - - [01/Dec/2016:14:02:23 +0100] "-" 408 -
+::1 - - [01/Dec/2016:14:03:06 +0100] "GET /index.php/Stop/All HTTP/1.1" 200 8
+::1 - - [01/Dec/2016:14:03:26 +0100] "-" 408 -
+::1 - - [01/Dec/2016:14:03:59 +0100] "GET /index.php/Stop/All HTTP/1.1" 200 1420
+::1 - - [01/Dec/2016:14:04:20 +0100] "-" 408 -
+::1 - - [01/Dec/2016:14:04:51 +0100] "GET /index.php/Stop/All HTTP/1.1" 200 1420
+::1 - - [01/Dec/2016:14:05:18 +0100] "GET /index.php/Stop/All HTTP/1.1" 500 7009
+::1 - - [01/Dec/2016:14:05:44 +0100] "GET /index.php/Stop/All HTTP/1.1" 200 8
+::1 - - [01/Dec/2016:14:08:08 +0100] "GET /index.php/Stop/All HTTP/1.1" 200 1320
+::1 - - [01/Dec/2016:14:08:27 +0100] "GET /index.php/Stop/All HTTP/1.1" 200 183
+::1 - - [01/Dec/2016:14:08:47 +0100] "GET /index.php/Stop/All HTTP/1.1" 200 858
+::1 - - [01/Dec/2016:14:09:11 +0100] "GET /index.php/Stop/All HTTP/1.1" 200 1533
+::1 - - [01/Dec/2016:14:09:22 +0100] "GET /index.php/Stop/All HTTP/1.1" 200 675
