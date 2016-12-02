@@ -25,6 +25,9 @@ class HourRepository
         $this->db = $db;
     }
 
+    /**
+    *list all the hours
+    */
     public function getAll()
     {
         $queryBuilder = $this->db->createQueryBuilder();
@@ -40,16 +43,16 @@ class HourRepository
 
         return json_encode($hourEntityList);
     }
+    
     //FIXME : ATTENTION HARDCODING degeulasse
     public function getHoursBetweenStops($parameters)
     {
-      if ($parameters['hour'] == null) {
-        $time =  date('H:m');
-      }
-       else {
-         $time = $parameters['hour'];
-       }
-     //  $time = "12:00"; //FOR TEST
+        if ($parameters['hour'] == null) {
+            $time =  date('H:m');
+        }else {
+            $time = $parameters['hour'];
+        }
+
         $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
             ->select('h.*')

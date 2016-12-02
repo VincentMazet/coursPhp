@@ -7,8 +7,4 @@ use Symfony\Component\HttpFoundation\Request;
 
 class IndexController
 {
-
-
-
-
 }

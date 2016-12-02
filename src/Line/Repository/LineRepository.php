@@ -23,11 +23,4 @@ class LineRepository
     {
         $this->db = $db;
     }
-
-
-
-
-
-
-
 }
