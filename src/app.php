@@ -17,6 +17,14 @@ $app['repository.user'] = function ($app) {
     return new App\Users\Repository\UserRepository($app['db']);
 };
 
-$app['repository.pc'] = function ($app) {
-    return new App\Pc\Repository\PCRepository($app['db']);
+$app['repository.line'] = function ($app) {
+    return new App\Line\Repository\LineRepository($app['db']);
+};
+
+$app['repository.stop'] = function ($app) {
+    return new App\Stop\Repository\StopRepository($app['db']);
+};
+
+$app['repository.hour'] = function ($app) {
+    return new App\Hour\Repository\HourRepository($app['db']);
 };

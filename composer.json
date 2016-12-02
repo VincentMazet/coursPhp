@@ -17,8 +17,15 @@
          "App\\Users\\Controller\\": "src/Users/Controller/",
          "App\\Users\\Repository\\": "src/Users/Repository/",
          "App\\Users\\Entity\\": "src/Users/Entity/",
-         "App\\Pc\\Repository\\": "src/Pc/Repository/",
-         "App\\Pc\\Entity\\": "src/Pc/Entity/"
+         "App\\Line\\Controller\\": "src/Line/Controller/",
+         "App\\Line\\Repository\\": "src/Line/Repository/",
+         "App\\Line\\Entity\\": "src/Line/Entity/",
+         "App\\Stop\\Controller\\": "src/Stop/Controller/",
+         "App\\Stop\\Repository\\": "src/Stop/Repository/",
+         "App\\Stop\\Entity\\": "src/Stop/Entity/",
+         "App\\Hour\\Controller\\": "src/Hour/Controller/",
+         "App\\Hour\\Repository\\": "src/Hour/Repository/",
+         "App\\Hour\\Entity\\": "src/Hour/Entity/"
        }
    }
 }

@@ -7,29 +7,49 @@ use Symfony\Component\HttpFoundation\Request;
 
 class IndexController
 {
+    public function loginAction(Request $request, Application $app)
+    {
+      $parameters['login'] = $request->get('login');
+      $parameters['password'] = $request->get('password');
+
+      $result = $app['repository.user']->connect($parameters);
+
+      return $result;
+    }
+
+    public function newUser(Request $request, Application $app){
+
+      $parameters['firstName'] = $request->get('firstName');
+      $parameters['lastName'] = $request->get('lastName');
+      $parameters['login'] = $request->get('login');
+      $parameters['password'] = $request->get('password');
+
+      $result = $app['repository.user']->newUser($parameters);
+
+      return $result;
+    }
+
     public function listAction(Request $request, Application $app)
     {
         $users = $app['repository.user']->getAll();
 
-        return $app['twig']->render('users.list.html.twig', array('users' => $users));
+        return $users;
     }
 
     public function deleteAction(Request $request, Application $app)
     {
         $parameters = $request->attributes->all();
-        $app['repository.user']->delete($parameters['id']);
 
-        return $app->redirect($app['url_generator']->generate('users.list'));
+
+        return $app['repository.user']->delete($parameters['id']);
     }
 
     public function editAction(Request $request, Application $app)
     {
         $parameters = $request->attributes->all();
         $user = $app['repository.user']->getById($parameters['id']);
-        $pcs = $app['repository.pc']->getAll();
 
-        return $app['twig']->render('users.form.html.twig', array('user' => $user,
-                                                                  'pcs' => $pcs));
+        return $user;
     }
 
     public function saveAction(Request $request, Application $app)
@@ -47,7 +67,6 @@ class IndexController
 
     public function newAction(Request $request, Application $app)
     {
-        $pcs = $app['repository.pc']->getAll();
-        return $app['twig']->render('users.form.html.twig', array('pcs' => $pcs));
+            return $app['twig']->render('users.form.html.twig');
     }
 }

@@ -3,9 +3,9 @@
 namespace App\Users\Repository;
 
 use App\Users\Entity\User;
-use App\Pc\Entity\Pc;
 
-use App\Pc\Repository;
+use Symfony\Component\HttpFoundation\Response;
+
 
 use Doctrine\DBAL\Connection;
 
@@ -22,6 +22,36 @@ class UserRepository
     public function __construct(Connection $db)
     {
         $this->db = $db;
+    }
+
+    /**
+    * Verify if the username and the password is correct.
+    *
+    * @param string $login
+    *   The login of the user to connect.
+    * @param string $password
+    *   The password of the user to connect.
+    * @return a json array of the user or an error;
+    */
+    public function connect($parameters){
+      $queryBuilder = $this->db->createQueryBuilder();
+      $queryBuilder
+        ->select('u.*')
+        ->from('users','u')
+        ->where('login = :login')
+        ->setParameter(':login', $parameters['login'])
+        ->where('password = :password')
+        ->setParameter(':password', $parameters['password']);
+
+        $statement = $queryBuilder->execute();
+        $userData = $statement->fetchAll();
+        $result = count($userData);
+        if($result == 0 || $result > 1){
+          return new Response('Connexion Error', 403, array('X-Status-Code' => 200));
+        }
+        $user = new User($userData[0]['id'], $userData[0]['last_name'], $userData[0]['first_name'], $userData[0]['login'], $userData[0]['password']);
+       return json_encode($user->toArray());
+
     }
 
    /**
@@ -45,12 +75,15 @@ class UserRepository
 
        $statement = $queryBuilder->execute();
        $usersData = $statement->fetchAll();
-       $pcr = new \App\Pc\Repository\PCRepository($this->db);
+       if (count($usersData) == 0){
+         return new Response('No result', 403, array('X-Status-Code' => 200));
+       }
        foreach ($usersData as $userData) {
-           $userEntityList[$userData['id']] = new User($userData['id'], $userData['nom'], $userData['prenom'], $pcr->getNameById($userData['idpc']));
+           $userEntityList[$userData['id']] = (new User($userData['id'], $userData['last_name'], $userData['first_name'], $userData['login'], $userData['password']))->toArray();
        }
 
-       return $userEntityList;
+
+       return json_encode($userEntityList);
    }
 
    /**
@@ -71,15 +104,13 @@ class UserRepository
            ->setParameter(0, $id);
        $statement = $queryBuilder->execute();
        $userData = $statement->fetchAll();
-       $pcr = new \App\Pc\Repository\PCRepository($this->db);
 
-       return new User($userData[0]['id'], $userData[0]['nom'], $userData[0]['prenom'], $pcr->getNameById($userData[0]['idpc']));
+       return new User($userData[0]['id'], $userData[0]['lastName'], $userData[0]['firstName'], $userData[0]['login'], $userData[0]['password']);
    }
 
     public function delete($id)
     {
         $queryBuilder = $this->db->createQueryBuilder();
-        $pcr = new \App\Pc\Repository\PCRepository($this->db);
 
         $queryBuilder
           ->delete('users')
@@ -97,45 +128,76 @@ class UserRepository
           ->where('id = :id')
           ->setParameter(':id', $parameters['id']);
 
-          $pcr = new \App\Pc\Repository\PCRepository($this->db);
-
-        if ($parameters['nom']) {
+        if ($parameters['lastName']) {
             $queryBuilder
-              ->set('nom', ':nom')
-              ->setParameter(':nom', $parameters['nom']);
+              ->set('nom', ':lastName')
+              ->setParameter(':lastName', $parameters['lastName']);
         }
 
-        if ($parameters['prenom']) {
+        if ($parameters['firstName']) {
             $queryBuilder
-            ->set('prenom', ':prenom')
-            ->setParameter(':prenom', $parameters['prenom']);
+            ->set('prenom', ':firstName')
+            ->setParameter(':firstName', $parameters['firstName']);
         }
 
-        if ($parameters['idpc']) {
+        if ($parameters['login']) {
             $queryBuilder
-            ->set('idpc', ':idpc')
-            ->setParameter(':idpc', $pcr->getIdByOS($parameters['idpc']));
+            ->set('login', ':login')
+            ->setParameter(':login', $parameters['login']);
+        }
+
+        if ($parameters['password']) {
+            $queryBuilder
+            ->set('password', ':password')
+            ->setParameter(':password', $parameters['password']);
         }
 
         $statement = $queryBuilder->execute();
     }
 
-    public function insert($parameters)
+    public function newUser($parameters)
     {
         $queryBuilder = $this->db->createQueryBuilder();
-        $pcr = new \App\Pc\Repository\PCRepository($this->db);
+
+        if($this->loginAlreadyExist($parameters['login'])){
+          return new Response('Login Already exist', 403, array('X-Status-Code' => 200));
+        }
+
         $queryBuilder
           ->insert('users')
           ->values(
               array(
-                'nom' => ':nom',
-                'prenom' => ':prenom',
-                'idpc' => ':idpc',
-              )
+                'last_name' => ':nom',
+                'first_name' => ':prenom',
+                'login' => ':login',
+                'password' => ':password'
+                   )
           )
-          ->setParameter(':nom', $parameters['nom'])
-          ->setParameter(':prenom', $parameters['prenom'])
-          ->setParameter(':idpc', $pcr->getIdByOS($parameters['idpc']));
-        $statement = $queryBuilder->execute();
+          ->setParameter(':nom', $parameters['lastName'])
+          ->setParameter(':prenom', $parameters['firstName'])
+          ->setParameter(':login', $parameters['login'])
+          ->setParameter(':password', $parameters['password']);
+
+          $statement = $queryBuilder->execute();
+          return 'ok';
+    }
+
+    private function loginAlreadyExist($login)
+    {
+      $queryBuilder = $this->db->createQueryBuilder();
+
+      $queryBuilder
+           ->select('u.*')
+           ->from('users', 'u')
+           ->where('login = ?')
+           ->setParameter(0, $login);
+
+      $statement = $queryBuilder->execute();
+      $userData = $statement->fetchAll();
+      $result = count($userData);
+      if($result != 0){
+         return true;
+
+       }
     }
 }
