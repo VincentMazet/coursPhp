@@ -8,13 +8,19 @@ use Symfony\Component\HttpFoundation\Request;
 class IndexController
 {
 
-    public function listAction(Request $request, Application $app){
+    /*
+     *list all the Hours
+     */
+    public function listHours(Request $request, Application $app){
       $hours = $app['repository.hour']->getAll();
 
       return $hours;
     }
 
-    public function getHoursBetweenStops(Request $request, Application $app){
+    /*
+     *Retrieve the hours of start and end of a travel in a line because of an hour of start
+     */
+    public function getTravelFromStopsId(Request $request, Application $app){
     	$parameters['idStartStop'] = $request->get('idStartStop');
       $parameters['idEndStop'] = $request->get('idEndStop');
       $parameters['hour'] = $request->get('hour');

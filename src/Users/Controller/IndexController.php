@@ -7,16 +7,31 @@ use Symfony\Component\HttpFoundation\Request;
 
 class IndexController
 {
-    public function loginAction(Request $request, Application $app)
+
+    /*
+     *List all the users
+     */
+    public function listUsers(Request $request, Application $app)
     {
-      $parameters['login'] = $request->get('login');
-      $parameters['password'] = $request->get('password');
+        $users = $app['repository.user']->getAll();
 
-      $result = $app['repository.user']->connect($parameters);
-
-      return $result;
+        return $users;
     }
 
+    /*
+     *Edit an user
+     */
+    public function editUser(Request $request, Application $app)
+    {
+        $parameters = $request->attributes->all();
+        $user = $app['repository.user']->getById($parameters['id']);
+
+        return $user;
+    }
+    
+    /*
+     *Create a new user
+     */
     public function newUser(Request $request, Application $app){
 
       $parameters['firstName'] = $request->get('firstName');
@@ -29,14 +44,10 @@ class IndexController
       return $result;
     }
 
-    public function listAction(Request $request, Application $app)
-    {
-        $users = $app['repository.user']->getAll();
-
-        return $users;
-    }
-
-    public function deleteAction(Request $request, Application $app)
+    /*
+     *delete an user
+     */
+    public function deleteUser(Request $request, Application $app)
     {
         $parameters = $request->attributes->all();
 
@@ -44,15 +55,10 @@ class IndexController
         return $app['repository.user']->delete($parameters['id']);
     }
 
-    public function editAction(Request $request, Application $app)
-    {
-        $parameters = $request->attributes->all();
-        $user = $app['repository.user']->getById($parameters['id']);
-
-        return $user;
-    }
-
-    public function saveAction(Request $request, Application $app)
+    /*
+     *update an user
+     */
+    public function updateUser(Request $request, Application $app)
     {
         $parameters = $request->request->all();
         if ($parameters['id']) {
@@ -65,8 +71,16 @@ class IndexController
         return $app->redirect($app['url_generator']->generate('users.list'));
     }
 
-    public function newAction(Request $request, Application $app)
+    /*
+     *log a user
+     */
+    public function loginUser(Request $request, Application $app)
     {
-            return $app['twig']->render('users.form.html.twig');
+      $parameters['login'] = $request->get('login');
+      $parameters['password'] = $request->get('password');
+
+      $result = $app['repository.user']->connect($parameters);
+
+      return $result;
     }
 }
