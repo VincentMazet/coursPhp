@@ -43,7 +43,12 @@ class HourRepository
     //FIXME : ATTENTION HARDCODING degeulasse
     public function getHoursBetweenStops($parameters)
     {
-       $time =  date('H:m');
+      if ($parameters['hour'] == null) {
+        $time =  date('H:m');
+      }
+       else {
+         $time = $parameters['hour'];
+       }
      //  $time = "12:00"; //FOR TEST
         $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
@@ -52,7 +57,7 @@ class HourRepository
             ->where('id_stop = :idStartStop')
             ->setParameter(':idStartStop', $parameters['idStartStop'])
             ->orwhere('id_stop = :idEndStop')
-            ->setParameter(':idEndStop', $parameters['idEndStop']); 
+            ->setParameter(':idEndStop', $parameters['idEndStop']);
         $statement = $queryBuilder->execute();
         $hoursData = $statement->fetchAll();
 

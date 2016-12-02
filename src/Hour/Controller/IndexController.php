@@ -16,8 +16,8 @@ class IndexController
 
     public function getHoursBetweenStops(Request $request, Application $app){
     	$parameters['idStartStop'] = $request->get('idStartStop');
-        $parameters['idEndStop'] = $request->get('idEndStop');
-
+      $parameters['idEndStop'] = $request->get('idEndStop');
+      $parameters['hour'] = $request->get('hour');
     	$result = $app['repository.hour']->getHoursBetweenStops($parameters);
 
     	return $result;

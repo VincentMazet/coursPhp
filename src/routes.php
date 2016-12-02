@@ -8,7 +8,7 @@ $app->post('/users/save', 'App\Users\Controller\IndexController::saveAction')->b
 $app->get('/users/login','App\Users\Controller\IndexController::loginAction')->bind('users.login');
 $app->get('/Hour/TravelStopId','App\Hour\Controller\IndexController::getTravelStopId')->bind('hour.TravelStopId');
 $app->get('/Stop/TravelStopId','App\Stop\Controller\IndexController::getStopForTravel')->bind('stop.TravelStopId');
+$app->get('/Stop/getIdByName','App\Stop\Controller\IndexController::getIdByName')->bind('stop.getIdByName');
 $app->get('/Hour/list','App\Hour\Controller\IndexController::listAction')->bind('hour.list');
 $app->get('/Stop/All','App\Stop\Controller\IndexController::getAll')->bind('stop.list');
 $app->get('/Hour/getHoursBetweenStops','App\Hour\Controller\IndexController::getHoursBetweenStops')->bind('hour.getHoursBetweenStops');
-

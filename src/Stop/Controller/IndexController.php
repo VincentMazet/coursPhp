@@ -23,5 +23,12 @@ class IndexController
     return $result;
   }
 
+  public function getIdByName(Request $request, Application $app)
+  {
+    $parameters['name'] = $request->get('name');
+    $result = $app['repository.stop']->getIdByName($parameters);
+    return $result;
+  }
+
 
 }

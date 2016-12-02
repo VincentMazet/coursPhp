@@ -25,18 +25,21 @@ class StopRepository
   }
 
   public function getStopForTravel($parameters){
+    $i = 1;
     if ($this->stopExist($parameters)) {
       if ($this->getDirection($parameters)) {
         for ($numero = (int) $parameters['idStartStop']; $numero <= $parameters['idEndStop']; $numero++)
         {
-          $tab[]=$numero;
+          $tab[$i]=$numero;
+          $i++;
         }
 
       }
       else {
         for ($numero = (int) $parameters['idStartStop']; $numero >= $parameters['idEndStop']; $numero--)
         {
-          $tab[]=$numero;
+          $tab[$i]=$numero;
+          $i++;
         }
       }
       return json_encode($tab);
@@ -104,6 +107,25 @@ class StopRepository
 
 
     return json_encode($stopEntityList);
+  }
+
+  public function getIdByName($parameters){
+    $queryBuilder = $this->db->createQueryBuilder();
+    $queryBuilder
+        ->select('s.*')
+        ->from('stops','s')
+        ->where('name = :name')
+        ->setParameter(':name', $parameters['name']);
+
+    $statement = $queryBuilder->execute();
+    $stopsData = $statement->fetchAll();
+    if (count($stopsData) == 0 && count($stopsData) > 1){
+      return new Response('No result Or multiple stops', 403, array('X-Status-Code' => 200));
+    }
+
+
+
+    return json_encode($stopsData[0]['id']);
   }
 
 
