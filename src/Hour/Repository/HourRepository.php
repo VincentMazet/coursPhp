@@ -53,56 +53,62 @@ class HourRepository
             $time = $parameters['hour'];
         }
 
-        if(!checkLine($parameters['idStartStop'], $parameters['idEndStop'])){
-            //Throw new Exception()
+        if(!$this->checkLine($parameters['idStartStop'], $parameters['idEndStop'])){
+            die();
         }
+
+        $queryBuilder = $this->db->createQueryBuilder();
 
         $queryBuilder
             ->select('h.*')
             ->from('hours','h')
             ->where('id_stop = :idStartStop')
-            ->setParameter(':idStartStop', $parameters['idStartStop']));
+            ->setParameter(':idStartStop', $parameters['idStartStop']);
         $statement = $queryBuilder->execute();
         $hoursStartData = $statement->fetchAll();
         
+        var_dump($hoursStartData); die;
+
         $first = true;
         $firstStartStop = null;
-
-        for($hoursStartData as $hourData){
+        foreach($hoursStartData as $hourData){
             if(strtotime($hourData['hour']) >= strtotime($time)){
-                if ($first){
+                if ($first == true){
                     $firstStartStop = $hourData;
                     $first = false;
-                }  
-            } 
+                }
+            }
         }
 
-        $queryBuilder
-            ->select('h.*')
-            ->from('hours','h')
-            ->where('id_stop = :idEndStop')
-            ->setParameter(':idEndStop', $parameters['idEndStop']));
-        $statement = $queryBuilder->execute();
-        $hoursStopData = $statement->fetchAll();
+         $queryBuilder
+             ->select('h.*')
+             ->from('hours','h')
+             ->where('id_stop = :idEndStop')
+             ->setParameter(':idEndStop', $parameters['idEndStop']);
+         $statement = $queryBuilder->execute();
+         $hoursStopData = $statement->fetchAll();
 
-        $first = true;
-        $firstEndStop = null;
-        for($hoursStartData as $hourData){
-            if(strtotime($hourData['hour']) >= strtotime($firstStartStop['hour'])){
-                if ($first){
-                    $firstEndStop = $hourData;
-                    $first = false;
-                }  
-            } 
-        }
+         $first = true;
+         $firstEndStop = null;
+         foreach($hoursStartData as $hourData){
+             if(strtotime($hourData['hour']) >= strtotime($firstStartStop['hour'])){
+                 if ($first == true){
+                     $firstEndStop = $hourData;
+                     $first = false;
+                 }  
+             } 
+         }
 
-        $hourEntityList[$firstStartStop['id']] = (new Hour($firstStartStop['id'], $firstStartStop['id_stop'], $firstStartStop['id_line'], $firstStartStop['hour']))->toArray();
-        $hourEntityList[$firstEndStop['id']] = (new Hour($firstEndStop['id'], $firstEndStop['id_stop'], $firstEndStop['id_line'], $firstEndStop['hour']))->toArray();
-        return json_encode($hourEntityList);
+         $hourEntityList[$firstStartStop['id']] = (new Hour($firstStartStop['id'], $firstStartStop['id_stop'], $firstStartStop['id_line'], $firstStartStop['hour']))->toArray();
+         $hourEntityList[$firstEndStop['id']] = (new Hour($firstEndStop['id'], $firstEndStop['id_stop'], $firstEndStop['id_line'], $firstEndStop['hour']))->toArray();
+
+         return json_encode($hourEntityList);
     }
 
     private function checkLine($idStartStop, $idEndStop)
     {
+        $queryBuilder = $this->db->createQueryBuilder();
+
         $queryBuilder
             ->select('h.*')
             ->from('hours','h')
@@ -113,8 +119,8 @@ class HourRepository
         
         $idLines = array();
         
-        foreach($hoursData as $hourData){
-            array_push($cart, $hourData['id_line']);
+        foreach($hoursStartData as $hourData){
+            array_push($idLines, $hourData['id_line']);
         }
 
         $queryBuilder
