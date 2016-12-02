@@ -43,7 +43,7 @@ class HourRepository
 
         return json_encode($hourEntityList);
     }
-    
+
     //FIXME : ATTENTION HARDCODING degeulasse
     public function getHoursBetweenStops($parameters)
     {
@@ -53,29 +53,87 @@ class HourRepository
             $time = $parameters['hour'];
         }
 
-        $queryBuilder = $this->db->createQueryBuilder();
+        if(!checkLine($parameters['idStartStop'], $parameters['idEndStop'])){
+            //Throw new Exception()
+        }
+
         $queryBuilder
             ->select('h.*')
             ->from('hours','h')
             ->where('id_stop = :idStartStop')
-            ->setParameter(':idStartStop', $parameters['idStartStop'])
-            ->orwhere('id_stop = :idEndStop')
-            ->setParameter(':idEndStop', $parameters['idEndStop']);
+            ->setParameter(':idStartStop', $parameters['idStartStop']));
         $statement = $queryBuilder->execute();
-        $hoursData = $statement->fetchAll();
+        $hoursStartData = $statement->fetchAll();
+        
+        $first = true;
+        $firstStartStop = null;
 
-        $hourStartList = null;
-        $hourEndList = null;
-
-        foreach ($hoursData as $hourData) {
-            if($hourStartList == null && $hourData['id_stop'] == $parameters['idStartStop'] && strtotime($hourData['hour']) >= strtotime($time)) {
-                $hourStartList = $hourData;
-            }else if($hourEndList == null && $hourData['id_stop'] == $parameters['idEndStop'] && strtotime($hourData['hour']) >= strtotime($time)) {
-                $hourEndList = $hourData;
-            }
+        for($hoursStartData as $hourData){
+            if(strtotime($hourData['hour']) >= strtotime($time)){
+                if ($first){
+                    $firstStartStop = $hourData;
+                    $first = false;
+                }  
+            } 
         }
-        $hourEntityList[$hourStartList['id']] = (new Hour($hourStartList['id'], $hourStartList['id_stop'], $hourStartList['id_line'], $hourStartList['hour']))->toArray();
-        $hourEntityList[$hourEndList['id']] = (new Hour($hourEndList['id'], $hourEndList['id_stop'], $hourEndList['id_line'], $hourEndList['hour']))->toArray();
+
+        $queryBuilder
+            ->select('h.*')
+            ->from('hours','h')
+            ->where('id_stop = :idEndStop')
+            ->setParameter(':idEndStop', $parameters['idEndStop']));
+        $statement = $queryBuilder->execute();
+        $hoursStopData = $statement->fetchAll();
+
+        $first = true;
+        $firstEndStop = null;
+        for($hoursStartData as $hourData){
+            if(strtotime($hourData['hour']) >= strtotime($firstStartStop['hour'])){
+                if ($first){
+                    $firstEndStop = $hourData;
+                    $first = false;
+                }  
+            } 
+        }
+
+        $hourEntityList[$firstStartStop['id']] = (new Hour($firstStartStop['id'], $firstStartStop['id_stop'], $firstStartStop['id_line'], $firstStartStop['hour']))->toArray();
+        $hourEntityList[$firstEndStop['id']] = (new Hour($firstEndStop['id'], $firstEndStop['id_stop'], $firstEndStop['id_line'], $firstEndStop['hour']))->toArray();
         return json_encode($hourEntityList);
     }
+
+    private function checkLine($idStartStop, $idEndStop)
+    {
+        $queryBuilder
+            ->select('h.*')
+            ->from('hours','h')
+            ->where('id_stop = :idStartStop')
+            ->setParameter(':idStartStop', $idStartStop);
+        $statement = $queryBuilder->execute();
+        $hoursStartData = $statement->fetchAll();
+        
+        $idLines = array();
+        
+        foreach($hoursData as $hourData){
+            array_push($cart, $hourData['id_line']);
+        }
+
+        $queryBuilder
+            ->select('h.*')
+            ->from('hours','h')
+            ->where('id_stop = :idEndStop')
+            ->setParameter(':idEndStop', $idEndStop);
+        $statement = $queryBuilder->execute();
+        $hoursStopData = $statement->fetchAll();
+
+        foreach ($hoursStopData as $hourData) {
+            foreach ($idLines as $key) {
+                if($key == $hourData['id_line']){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
+
+
