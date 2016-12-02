@@ -88,7 +88,7 @@ class HourRepository
 
          $first = true;
          $firstEndStop = null;
-         foreach($hoursStartData as $hourData){
+         foreach($hoursStopData as $hourData){
              if(strtotime($hourData['hour']) >= strtotime($firstStartStop['hour'])){
                  if ($first == true){
                      $firstEndStop = $hourData;
