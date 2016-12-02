@@ -67,8 +67,6 @@ class HourRepository
         $statement = $queryBuilder->execute();
         $hoursStartData = $statement->fetchAll();
         
-        var_dump($hoursStartData); die;
-
         $first = true;
         $firstStartStop = null;
         foreach($hoursStartData as $hourData){
@@ -99,8 +97,8 @@ class HourRepository
              } 
          }
 
-         $hourEntityList[$firstStartStop['id']] = (new Hour($firstStartStop['id'], $firstStartStop['id_stop'], $firstStartStop['id_line'], $firstStartStop['hour']))->toArray();
-         $hourEntityList[$firstEndStop['id']] = (new Hour($firstEndStop['id'], $firstEndStop['id_stop'], $firstEndStop['id_line'], $firstEndStop['hour']))->toArray();
+          $hourEntityList[$firstStartStop['id']] = (new Hour($firstStartStop['id'], $firstStartStop['id_stop'], $firstStartStop['id_line'], $firstStartStop['hour']))->toArray();
+          $hourEntityList[$firstEndStop['id']] = (new Hour($firstEndStop['id'], $firstEndStop['id_stop'], $firstEndStop['id_line'], $firstEndStop['hour']))->toArray();
 
          return json_encode($hourEntityList);
     }
