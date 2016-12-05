@@ -4,6 +4,7 @@ namespace App\Stop\Controller;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class IndexController
 {
@@ -13,11 +14,14 @@ class IndexController
    */
   public function listStops(Request $request, Application $app)
   {
-    $result = $app['repository.stop']->getAll();
 
-    return $result;
+    $result = $app['repository.stop']->getAll();
+    $response = new Response($result);
+    $response->headers->set('Content-Type', 'application/json');
+
+    return $response;
   }
-  
+
   /*
    *retrieve the id of a stop by his name
    */
