@@ -20,7 +20,7 @@ class IndexController
 
     /*
      *Edit an user
-     */
+    */ 
     public function editUser(Request $request, Application $app)
     {
         $parameters = $request->attributes->all();
@@ -28,6 +28,7 @@ class IndexController
 
         return $user;
     }
+
     
     /*
      *Create a new user
@@ -56,7 +57,7 @@ class IndexController
     }
 
     /*
-     *update an user
+     *edit an user
      */
     public function updateUser(Request $request, Application $app)
     {

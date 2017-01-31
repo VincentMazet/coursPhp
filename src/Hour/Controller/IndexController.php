@@ -28,7 +28,4 @@ class IndexController
 
     	return $result;
     }
-
-
-
 }

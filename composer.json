@@ -25,7 +25,8 @@
          "App\\Stop\\Entity\\": "src/Stop/Entity/",
          "App\\Hour\\Controller\\": "src/Hour/Controller/",
          "App\\Hour\\Repository\\": "src/Hour/Repository/",
-         "App\\Hour\\Entity\\": "src/Hour/Entity/"
+         "App\\Hour\\Entity\\": "src/Hour/Entity/",
+         "App\\Utils\\Controller\\": "src/Utils/Controller/"
        }
    }
 }
