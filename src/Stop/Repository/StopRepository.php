@@ -29,7 +29,7 @@ class StopRepository
   */
   public function getStopForTravel($parameters){
     $i = 1;
-    if ($this->stopExist($parameters)) {
+    if ($this->stopExist($parameters['idStartStop']) && $this->stopExist($parameters['idStartStop'])) {
       if ($this->getDirection($parameters)) {
         for ($numero = (int) $parameters['idStartStop']; $numero <= $parameters['idEndStop']; $numero++)
         {
@@ -69,20 +69,6 @@ class StopRepository
     if($result == 0 || $result > 1){
       return false;
     }
-    $queryBuilder = $this->db->createQueryBuilder();
-    $queryBuilder
-    ->select('stops.*')
-    ->from('stops')
-    ->where('id = :idEndStop')
-    ->setParameter(':idEndStop', $parameters['idEndStop']);
-
-    $statement = $queryBuilder->execute();
-    $stopData = $statement->fetchAll();
-    $result = count($stopData);
-    if($result == 0 || $result > 1){
-      return false;
-    }
-
     return true;
   }
 
