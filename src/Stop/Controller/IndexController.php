@@ -19,7 +19,7 @@ class IndexController
     $response = new Response($result);
     $response->headers->set('Content-Type', 'application/json');
 
-    return $response;
+    return $result;
   }
 
   /*
