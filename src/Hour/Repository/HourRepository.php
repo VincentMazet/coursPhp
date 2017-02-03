@@ -38,7 +38,7 @@ class HourRepository
         $hoursData = $statement->fetchAll();
 
         foreach ($hoursData as $hourData) {
-          $hourEntityList[$hourData['id']] = (new Hour($hourData['id'], $hourData['id_stop'], $hourData['id_line'], $hourData['hour']))->toArray();
+          $hourEntityList[$hourData['id']] = (new Hour($hourData['id'], $hourData['id_stop'], $hourData['id_line'], $hourData['hour'], $hourData['direction'], $hourData['idStartStop'], $hourData['idEndStop']))->toArray();
         }
 
         return json_encode($hourEntityList);
@@ -53,7 +53,7 @@ class HourRepository
             $time = $parameters['hour'];
         }
 
-        if(!$this->checkLine($parameters['idStartStop'], $parameters['idEndStop'])){
+        if(!$this->checkLine($parameters['idStartStop'], $parameters['idEndStop'], $hourData['idStartStop'], $hourData['idEndStop'])){
             die();
         }
 
@@ -97,8 +97,8 @@ class HourRepository
              } 
          }
 
-          $hourEntityList[$firstStartStop['id']] = (new Hour($firstStartStop['id'], $firstStartStop['id_stop'], $firstStartStop['id_line'], $firstStartStop['hour']))->toArray();
-          $hourEntityList[$firstEndStop['id']] = (new Hour($firstEndStop['id'], $firstEndStop['id_stop'], $firstEndStop['id_line'], $firstEndStop['hour']))->toArray();
+          $hourEntityList[$firstStartStop['id']] = (new Hour($firstStartStop['id'], $firstStartStop['id_stop'], $firstStartStop['id_line'], $firstStartStop['hour'], $hourData['direction'], $hourData['idStartStop'], $hourData['idEndStop']))->toArray();
+          $hourEntityList[$firstEndStop['id']] = (new Hour($firstEndStop['id'], $firstEndStop['id_stop'], $firstEndStop['id_line'], $firstEndStop['hour'], $hourData['direction'], $hourData['idStartStop'], $hourData['idEndStop']))->toArray();
 
          return json_encode($hourEntityList);
     }
