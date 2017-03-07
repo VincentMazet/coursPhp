@@ -1,10 +1,11 @@
 # TubBourg API
-silex api for the tubBourg Android application
-download the api and launch it with : `composer run`
+1. silex api for the tubBourg Android application
+2. download the api and launch it with : `composer run`
 
 ## Usage
-just call the routes in `src/routes.php`
-Free to use, modify, copy etc...
+1. just call the routes in `src/routes.php`
+2. API documentation in `doc/api/index.html`
+3. Free to use, modify, copy etc...
 
 ## Contributing
 1. Fork it!
