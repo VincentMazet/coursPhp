@@ -1,15 +1,13 @@
 <?php
 
-/*
+/**
  *Routing
  */
 
-//Users
 $app->get('/users/list', 'App\Users\Controller\IndexController::listUsers')->bind('users.list');
-$app->get('/users/edit/{id}', 'App\Users\Controller\IndexController::editUser')->bind('users.edit');
+$app->get('/users/edit', 'App\Users\Controller\IndexController::updateUser')->bind('users.update');
 $app->get('/users/new', 'App\Users\Controller\IndexController::newUser')->bind('users.new');
 $app->post('/users/delete/{id}', 'App\Users\Controller\IndexController::deleteUser')->bind('users.delete');
-$app->post('/users/update', 'App\Users\Controller\IndexController::updateUser')->bind('users.update');
 $app->get('/users/login','App\Users\Controller\IndexController::loginUser')->bind('users.login');
 
 //Stops

@@ -6,6 +6,9 @@
          "doctrine/dbal": "^2.5",
         "twbs/bootstrap": "^3.3"
     },
+    "require":{
+        "phpdocumentor/phpdocumentor": "*"
+    },
     "scripts": {
       "run": [
         "echo 'Started web server on http://localhost:8000'",

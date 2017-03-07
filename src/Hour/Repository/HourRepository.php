@@ -11,7 +11,7 @@ use Doctrine\DBAL\Connection;
 
 
 /**
- * Passage repository.
+ * Hour repository.
  */
 class HourRepository
 {
@@ -27,6 +27,8 @@ class HourRepository
 
     /**
     *list all the hours
+    *
+    *@return an array collection of hours, keyed by hour id.
     */
     public function getAll()
     {
@@ -44,7 +46,11 @@ class HourRepository
         return json_encode($hourEntityList);
     }
 
-    //FIXME : ATTENTION HARDCODING degeulasse
+    /**
+    * travel function
+    *
+    *@return the next hour of the two stops selected, keyed by id's.
+    */
     public function getHoursBetweenStops($parameters)
     {
         if ($parameters['hour'] == null) {
@@ -66,7 +72,7 @@ class HourRepository
             ->setParameter(':idStartStop', $parameters['idStartStop']);
         $statement = $queryBuilder->execute();
         $hoursStartData = $statement->fetchAll();
-        
+
         $first = true;
         $firstStartStop = null;
         foreach($hoursStartData as $hourData){
@@ -93,8 +99,8 @@ class HourRepository
                  if ($first == true){
                      $firstEndStop = $hourData;
                      $first = false;
-                 }  
-             } 
+                 }
+             }
          }
 
           $hourEntityList[$firstStartStop['id']] = (new Hour($firstStartStop['id'], $firstStartStop['id_stop'], $firstStartStop['id_line'], $firstStartStop['hour'], $hourData['direction'], $hourData['idStartStop'], $hourData['idEndStop']))->toArray();
@@ -114,9 +120,9 @@ class HourRepository
             ->setParameter(':idStartStop', $idStartStop);
         $statement = $queryBuilder->execute();
         $hoursStartData = $statement->fetchAll();
-        
+
         $idLines = array();
-        
+
         foreach($hoursStartData as $hourData){
             array_push($idLines, $hourData['id_line']);
         }
@@ -139,5 +145,3 @@ class HourRepository
         return false;
     }
 }
-
-

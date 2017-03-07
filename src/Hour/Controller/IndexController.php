@@ -4,12 +4,16 @@ namespace App\Hour\Controller;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
-
+/**
+*Hour controller
+*/
 class IndexController
 {
 
-    /*
-     *list all the Hours
+    /**
+     *List all the Hours
+     *
+     *@return an array collection of hours, keyed by hour id.
      */
     public function listHours(Request $request, Application $app){
       $hours = $app['repository.hour']->getAll();
@@ -17,8 +21,10 @@ class IndexController
       return $hours;
     }
 
-    /*
+    /**
      *Retrieve the hours of start and end of a travel in a line because of an hour of start
+     *
+     *@return the next hour of the two stops selected, keyed by id's.
      */
     public function getTravelFromStopsId(Request $request, Application $app){
     	$parameters['idStartStop'] = $request->get('idStartStop');

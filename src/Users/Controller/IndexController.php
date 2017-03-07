@@ -5,6 +5,9 @@ namespace App\Users\Controller;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+*User Controller
+*/
 class IndexController
 {
 
@@ -18,18 +21,6 @@ class IndexController
         return $users;
     }
 
-    /*
-     *Edit an user
-    */ 
-    public function editUser(Request $request, Application $app)
-    {
-        $parameters = $request->attributes->all();
-        $user = $app['repository.user']->getById($parameters['id']);
-
-        return $user;
-    }
-
-    
     /*
      *Create a new user
      */

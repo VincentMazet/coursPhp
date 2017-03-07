@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Hour\Entity;
-
+/**
+*Entity Hour
+*/
 class Hour
 {
     protected $id;
@@ -11,11 +13,11 @@ class Hour
     protected $idLine;
 
     protected $hour;
-    
+
     protected $direction;
-    
+
     protected $idStartStop;
-    
+
     protected $idEndStop;
 
 
@@ -50,17 +52,17 @@ class Hour
     {
         $this->hour = $hour;
     }
-    
+
     public function setDirection($direction)
     {
     	$this->direction = $direction;
     }
-    
+
     public function setIdStartStop($idStartStop)
     {
     	$this->idStartStop = $idStartStop;
     }
-    
+
     public function setIdEndStop($idEndStop)
     {
     	$this->idEndStop = $idEndStop;
@@ -85,17 +87,17 @@ class Hour
     {
         return $this->hour;
     }
-    
+
     public function getDirection()
     {
     	return $this->direction;
     }
-    
+
     public function getIdStartStop()
     {
     	return $this->idStartStop;
     }
-    
+
     public function getIdEndStop()
     {
     	return $this->idEndStop;

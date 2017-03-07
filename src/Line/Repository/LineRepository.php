@@ -27,7 +27,7 @@ class LineRepository
     /**
     * Returns a collection of Lines.
     *
-    * @return array A collection of lines, keyed by line id.
+    * @return an array collection of lines, keyed by line id.
     */
    public function getAll()
    {

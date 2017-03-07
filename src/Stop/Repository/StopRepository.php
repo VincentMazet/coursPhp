@@ -25,7 +25,9 @@ class StopRepository
   }
 
   /**
-  *return an array of idStops between a idStart and a idEnd
+  * get id stops between an idStart and a idEnd
+  *
+  *@return an array of idStops
   */
   public function getStopForTravel($parameters){
     $i = 1;
@@ -54,6 +56,8 @@ class StopRepository
 
   /**
   *check if a stop exist by his id
+  *
+  *@return boolean
   */
   public function stopExist($parameters){
     $queryBuilder = $this->db->createQueryBuilder();
@@ -93,7 +97,8 @@ class StopRepository
   }
 
   /**
-  *Return an id Stop by the name of the stop
+  *get an idStop by his name
+  *@return id stop
   */
   public function getIdByName($parameters){
     $queryBuilder = $this->db->createQueryBuilder();

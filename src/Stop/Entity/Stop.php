@@ -2,6 +2,9 @@
 
 namespace App\Stop\Entity;
 
+/*
+* Stop Entity
+*/
 class Stop
 {
     protected $id;

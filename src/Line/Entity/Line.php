@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Line\Entity;
-
+/**
+* Line entity
+*/
 class Line
 {
     protected $id;
