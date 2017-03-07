@@ -4,6 +4,7 @@ download the api and launch it with : `composer run`
 
 ## Usage
 just call the routes in `src/routes.php`
+Free to use, modify, copy etc...
 
 ## Contributing
 1. Fork it!
@@ -15,6 +16,3 @@ just call the routes in `src/routes.php`
 ## Credits
 Alexy Vercruysse
 Vincent Mazet
-
-## License
-TODO: Write license
