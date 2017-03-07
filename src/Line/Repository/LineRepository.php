@@ -24,10 +24,25 @@ class LineRepository
         $this->db = $db;
     }
 
+    /**
+    * Returns a collection of Lines.
+    *
+    * @return an array collection of lines, keyed by line id.
+    */
+   public function getAll()
+   {
+       $queryBuilder = $this->db->createQueryBuilder();
+       $queryBuilder
+           ->select(' * FROM `lines`');
 
-
-
-
-
-
+       $statement = $queryBuilder->execute();
+       $linesData = $statement->fetchAll();
+       if (count($linesData) == 0){
+         return new Response('No result', 403, array('X-Status-Code' => 200));
+       }
+       foreach ($linesData as $lineData) {
+           $lineEntityList[$lineData['id']] = (new Line($lineData['id'], $lineData['name']))->toArray();
+       }
+       return json_encode($lineEntityList);
+   }
 }

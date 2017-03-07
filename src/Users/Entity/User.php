@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Users\Entity;
-
+/**
+*User entity
+*/
 class User
 {
     protected $id;
@@ -59,15 +61,15 @@ class User
     public function getLastName()
     {
         return $this->lastName;
-    }  
+    }
     public function getLogin()
     {
         return $this->login;
-    } 
+    }
     public function getPassword()
     {
         return $this->password;
-    }  
+    }
 
     public function toArray()
     {

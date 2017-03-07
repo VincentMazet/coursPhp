@@ -1,14 +1,23 @@
 <?php
 
-$app->get('/users/list', 'App\Users\Controller\IndexController::listAction')->bind('users.list');
-$app->get('/users/edit/{id}', 'App\Users\Controller\IndexController::editAction')->bind('users.edit');
+/**
+ *Routing
+ */
+
+$app->get('/users/list', 'App\Users\Controller\IndexController::listUsers')->bind('users.list');
+$app->get('/users/edit', 'App\Users\Controller\IndexController::updateUser')->bind('users.update');
 $app->get('/users/new', 'App\Users\Controller\IndexController::newUser')->bind('users.new');
-$app->post('/users/delete/{id}', 'App\Users\Controller\IndexController::deleteAction')->bind('users.delete');
-$app->post('/users/save', 'App\Users\Controller\IndexController::saveAction')->bind('users.save');
-$app->get('/users/login','App\Users\Controller\IndexController::loginAction')->bind('users.login');
-$app->get('/Hour/TravelStopId','App\Hour\Controller\IndexController::getTravelStopId')->bind('hour.TravelStopId');
-$app->get('/Stop/TravelStopId','App\Stop\Controller\IndexController::getStopForTravel')->bind('stop.TravelStopId');
-$app->get('/Stop/getIdByName','App\Stop\Controller\IndexController::getIdByName')->bind('stop.getIdByName');
-$app->get('/Hour/list','App\Hour\Controller\IndexController::listAction')->bind('hour.list');
-$app->get('/Stop/All','App\Stop\Controller\IndexController::getAll')->bind('stop.list');
-$app->get('/Hour/getHoursBetweenStops','App\Hour\Controller\IndexController::getHoursBetweenStops')->bind('hour.getHoursBetweenStops');
+$app->post('/users/delete/{id}', 'App\Users\Controller\IndexController::deleteUser')->bind('users.delete');
+$app->get('/users/login','App\Users\Controller\IndexController::loginUser')->bind('users.login');
+
+//Stops
+$app->get('/stop/list','App\Stop\Controller\IndexController::listStops')->bind('stop.list');
+$app->get('/stop','App\Stop\Controller\IndexController::getStopIdByName')->bind('stop.getStopIdByName');
+$app->get('/stop/list/travel/id','App\Stop\Controller\IndexController::listTravelStopId')->bind('stop.listTravelStopId');
+
+//Hours
+$app->get('/hour/list','App\Hour\Controller\IndexController::listHours')->bind('hour.list');
+$app->get('/hour/travel/stops/id','App\Hour\Controller\IndexController::getTravelFromStopsId')->bind('hour.getTravelFromStopsId');
+
+//Line
+$app->get('/line/list','App\Line\Controller\IndexController::listLines')->bind('line.list');

@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Doctrine\DBAL\Connection;
 
 /**
-* Passage repository.
+* Stop repository.
 */
 class StopRepository
 {
@@ -24,9 +24,14 @@ class StopRepository
     $this->db = $db;
   }
 
+  /**
+  * get id stops between an idStart and a idEnd
+  *
+  *@return an array of idStops
+  */
   public function getStopForTravel($parameters){
     $i = 1;
-    if ($this->stopExist($parameters)) {
+    if ($this->stopExist($parameters['idStartStop']) && $this->stopExist($parameters['idStartStop'])) {
       if ($this->getDirection($parameters)) {
         for ($numero = (int) $parameters['idStartStop']; $numero <= $parameters['idEndStop']; $numero++)
         {
@@ -47,19 +52,13 @@ class StopRepository
     else {
       return new Response('Stop inconnu', 403, array('X-Status-Code' => 200));
     }
-
   }
 
-  public function getDirection($parameters){
-    if ($parameters['idStartStop']<$parameters['idEndStop']) {
-      $retVal = true;
-    }
-    else {
-      $retVal = false;
-    }
-    return $retVal;
-  }
-
+  /**
+  *check if a stop exist by his id
+  *
+  *@return boolean
+  */
   public function stopExist($parameters){
     $queryBuilder = $this->db->createQueryBuilder();
     $queryBuilder
@@ -74,22 +73,12 @@ class StopRepository
     if($result == 0 || $result > 1){
       return false;
     }
-    $queryBuilder = $this->db->createQueryBuilder();
-    $queryBuilder
-    ->select('stops.*')
-    ->from('stops')
-    ->where('id = :idEndStop')
-    ->setParameter(':idEndStop', $parameters['idEndStop']);
-
-    $statement = $queryBuilder->execute();
-    $stopData = $statement->fetchAll();
-    $result = count($stopData);
-    if($result == 0 || $result > 1){
-      return false;
-    }
     return true;
   }
 
+  /**
+  *list all the stops
+  */
   public function getAll(){
     $queryBuilder = $this->db->createQueryBuilder();
     $queryBuilder
@@ -104,11 +93,13 @@ class StopRepository
     foreach ($stopsData as $stopData) {
         $stopEntityList[$stopData['id']] = (new Stop($stopData['id'], $stopData['name'], $stopData['description'], $stopData['latitude'], $stopData['longitude']))->toArray();
     }
-
-
     return json_encode($stopEntityList);
   }
 
+  /**
+  *get an idStop by his name
+  *@return id stop
+  */
   public function getIdByName($parameters){
     $queryBuilder = $this->db->createQueryBuilder();
     $queryBuilder
@@ -119,11 +110,9 @@ class StopRepository
 
     $statement = $queryBuilder->execute();
     $stopsData = $statement->fetchAll();
-    if (count($stopsData) == 0 && count($stopsData) > 1){
-      return new Response('No result Or multiple stops', 403, array('X-Status-Code' => 200));
+    if (count($stopsData) != 1){
+      return new Response('Wrong stop name', 403, array('X-Status-Code' => 200));
     }
-
-
 
     return json_encode($stopsData[0]['id']);
   }
