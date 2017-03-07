@@ -16,9 +16,6 @@ class IndexController
   {
 
     $result = $app['repository.stop']->getAll();
-    $response = new Response($result);
-    $response->headers->set('Content-Type', 'application/json');
-
     return $result;
   }
 

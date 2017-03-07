@@ -89,7 +89,6 @@ class StopRepository
     foreach ($stopsData as $stopData) {
         $stopEntityList[$stopData['id']] = (new Stop($stopData['id'], $stopData['name'], $stopData['description'], $stopData['latitude'], $stopData['longitude']))->toArray();
     }
-
     return json_encode($stopEntityList);
   }
 

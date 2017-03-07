@@ -21,5 +21,5 @@ $app->get('/stop/list/travel/id','App\Stop\Controller\IndexController::listTrave
 $app->get('/hour/list','App\Hour\Controller\IndexController::listHours')->bind('hour.list');
 $app->get('/hour/travel/stops/id','App\Hour\Controller\IndexController::getTravelFromStopsId')->bind('hour.getTravelFromStopsId');
 
-//Utils
-$app->get('/utils/data/db','App\Utils\Controller\IndexController::getDataDb')->bind('utils.getDataDb');
+//Line
+$app->get('/line/list','App\Line\Controller\IndexController::listLines')->bind('line.list');
